@@ -19,11 +19,10 @@
 	</parent>
 
 	<properties>
-  	<sonar.projectKey>lovelace-mmqs2020_proj</sonar.projectKey>
+        <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
+		<sonar.projectKey>lovelace-mmqs2020_spring-data-jdbc-mmqs</sonar.projectKey>
   	<sonar.organization>lovelace-mmqs2020</sonar.organization>
   	<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-		<sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
-
 
 		<dist.id>spring-data-jdbc</dist.id>
 		<springdata.commons>2.3.0.BUILD-SNAPSHOT</springdata.commons>
