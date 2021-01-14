@@ -313,10 +313,10 @@ class DefaultSelectBuilder implements SelectBuilder, SelectAndFrom, SelectFromAn
 
 		/*
 		 * (non-Javadoc)
-		 * @see org.springframework.data.relational.core.sql.SelectBuilder.SelectOnConditionComparison#equals(org.springframework.data.relational.core.sql.Expression)
+		 * @see org.springframework.data.relational.core.sql.SelectBuilder.SelectOnConditionComparison#isequals(org.springframework.data.relational.core.sql.Expression)
 		 */
 		@Override
-		public JoinBuilder equals(Expression column) {
+		public JoinBuilder isequals(Expression column) {
 			this.to = column;
 			return this;
 		}

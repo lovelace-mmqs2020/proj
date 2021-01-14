@@ -399,7 +399,7 @@ class SqlGenerator {
 		SelectBuilder.SelectJoin baseSelect = selectBuilder.from(table);
 
 		for (Join join : joinTables) {
-			baseSelect = baseSelect.leftOuterJoin(join.joinTable).on(join.joinColumn).equals(join.parentId);
+			baseSelect = baseSelect.leftOuterJoin(join.joinTable).on(join.joinColumn).isequals(join.parentId);
 		}
 
 		return (SelectBuilder.SelectWhere) baseSelect;

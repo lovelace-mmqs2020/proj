@@ -115,7 +115,7 @@ public class SelectRendererUnitTests {
 		Table department = SQL.table("department");
 
 		Select select = Select.builder().select(employee.column("id"), department.column("name")).from(employee) //
-				.join(department).on(employee.column("department_id")).equals(department.column("id")) //
+				.join(department).on(employee.column("department_id")).isequals(department.column("id")) //
 				.build();
 
 		assertThat(SqlRenderer.toString(select)).isEqualTo("SELECT employee.id, department.name FROM employee "
@@ -130,7 +130,7 @@ public class SelectRendererUnitTests {
 
 		Select select = Select.builder().select(employee.column("id"), department.column("name")) //
 				.from(employee) //
-				.leftOuterJoin(department).on(employee.column("department_id")).equals(department.column("id")) //
+				.leftOuterJoin(department).on(employee.column("department_id")).isequals(department.column("id")) //
 				.build();
 
 		assertThat(SqlRenderer.toString(select)).isEqualTo("SELECT employee.id, department.name FROM employee "
@@ -144,8 +144,8 @@ public class SelectRendererUnitTests {
 		Table department = SQL.table("department");
 
 		Select select = Select.builder().select(employee.column("id"), department.column("name")).from(employee) //
-				.join(department).on(employee.column("department_id")).equals(department.column("id")) //
-				.and(employee.column("tenant")).equals(department.column("tenant")) //
+				.join(department).on(employee.column("department_id")).isequals(department.column("id")) //
+				.and(employee.column("tenant")).isequals(department.column("tenant")) //
 				.build();
 
 		assertThat(SqlRenderer.toString(select)).isEqualTo("SELECT employee.id, department.name FROM employee " //
@@ -161,9 +161,9 @@ public class SelectRendererUnitTests {
 		Table tenant = SQL.table("tenant").as("tenant_base");
 
 		Select select = Select.builder().select(employee.column("id"), department.column("name")).from(employee) //
-				.join(department).on(employee.column("department_id")).equals(department.column("id")) //
-				.and(employee.column("tenant")).equals(department.column("tenant")) //
-				.join(tenant).on(tenant.column("tenant_id")).equals(department.column("tenant")) //
+				.join(department).on(employee.column("department_id")).isequals(department.column("id")) //
+				.and(employee.column("tenant")).isequals(department.column("tenant")) //
+				.join(tenant).on(tenant.column("tenant_id")).isequals(department.column("tenant")) //
 				.build();
 
 		assertThat(SqlRenderer.toString(select)).isEqualTo("SELECT employee.id, department.name FROM employee " //
@@ -341,7 +341,7 @@ public class SelectRendererUnitTests {
 		Select select = Select.builder() //
 				.select(Functions.count(table.asterisk()).as("counter"), table.column(SqlIdentifier.quoted("reserved_keyword"))) //
 				.from(table) //
-				.join(join_table).on(table.column("source")).equals(join_table.column("target")).build();
+				.join(join_table).on(table.column("source")).isequals(join_table.column("target")).build();
 
 		String rendered = SqlRenderer.create(new RenderContextFactory(PostgresDialect.INSTANCE).createRenderContext())
 				.render(select);

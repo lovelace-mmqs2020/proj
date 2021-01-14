@@ -130,8 +130,8 @@ public class SelectBuilderUnitTests {
 		Column department_name = employee.column("name").as("department_name");
 
 		Select select = builder.select(name, department_name).from(employee).join(department)
-				.on(SQL.column("department_id", employee)).equals(SQL.column("id", department))
-				.and(SQL.column("tenant", employee)).equals(SQL.column("tenant", department))
+				.on(SQL.column("department_id", employee)).isequals(SQL.column("id", department))
+				.and(SQL.column("tenant", employee)).isequals(SQL.column("tenant", department))
 				.orderBy(OrderByField.from(name).asc()).build();
 
 		CapturingVisitor visitor = new CapturingVisitor();
