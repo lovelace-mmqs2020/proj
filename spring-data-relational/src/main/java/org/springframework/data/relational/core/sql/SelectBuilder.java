@@ -512,6 +512,7 @@ public interface SelectBuilder {
 		 * @return {@code this} builder.
 		 * @see Table#column(String)
 		 */
+		@Override
 		SelectFromAndJoinCondition equals(Expression column);
 	}
 
