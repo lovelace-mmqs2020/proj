@@ -95,9 +95,7 @@ class SelectListVisitor extends TypedSubtreeVisitor<SelectList> implements PartR
 
 			insideFunction = false;
 			requiresComma = true;
-		} else if (segment instanceof AsteriskFromTable) {
-			builder.append("*");
-			requiresComma = true;
+		
 		} else if (segment instanceof Column) {
 
 			builder.append(NameRenderer.render(context, (Column) segment));
