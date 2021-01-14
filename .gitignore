@@ -8,6 +8,7 @@ target/
 .sonar4clipse
 *.sonar4clipseExternals
 *.graphml
+.svn/
 
 #prevent license accepting file to get accidentially commited to git
 container-license-acceptance.txt
