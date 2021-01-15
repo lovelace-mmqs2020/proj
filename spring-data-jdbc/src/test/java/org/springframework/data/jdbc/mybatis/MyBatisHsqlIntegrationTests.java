@@ -81,7 +81,7 @@ public class MyBatisHsqlIntegrationTests {
 
 		DummyEntity reloaded = repository.findById(saved.id).orElseThrow(AssertionFailedError::new);
 
-		assertThat(reloaded).isNotNull().extracting(e -> e.id, e -> e.name);
+		assertThat(reloaded).extracting(e -> e.id, e -> e.name).isNotNull();
 	}
 
 	interface DummyEntityRepository extends CrudRepository<DummyEntity, Long> {
