@@ -194,7 +194,7 @@ public class EnableJdbcAuditingHsqlIntegrationTests {
 
 					AuditingAnnotatedDummyEntity entity = repository.save(new AuditingAnnotatedDummyEntity());
 
-					assertThat(entity.id).isNotNull();
+					assertThat(entity.id).isNotEqualTo(-1);
 				});
 	}
 
