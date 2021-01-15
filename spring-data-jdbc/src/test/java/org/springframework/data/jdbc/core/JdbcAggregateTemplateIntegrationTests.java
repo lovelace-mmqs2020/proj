@@ -849,23 +849,22 @@ public class JdbcAggregateTemplateIntegrationTests {
 		template.save(aggregate);
 
 		VersionedAggregate reloadedAggregate = template.findById(aggregate.getId(), aggregate.getClass());
-		assertThat(reloadedAggregate.getVersion()).isEqualTo(toConcreteNumber.apply(1))
-				.withFailMessage("version field should initially have the value 1");
+		assertThat(reloadedAggregate.getVersion()).withFailMessage("version field should initially have the value 1").isEqualTo(toConcreteNumber.apply(1));
 		template.save(reloadedAggregate);
 
 		VersionedAggregate updatedAggregate = template.findById(aggregate.getId(), aggregate.getClass());
-		assertThat(updatedAggregate.getVersion()).isEqualTo(toConcreteNumber.apply(2))
-				.withFailMessage("version field should increment by one with each save");
+		assertThat(updatedAggregate.getVersion()).withFailMessage("version field should increment by one with each save").isEqualTo(toConcreteNumber.apply(2));
+				
 
 		reloadedAggregate.setVersion(toConcreteNumber.apply(1));
 		assertThatThrownBy(() -> template.save(reloadedAggregate))
-				.hasRootCauseInstanceOf(OptimisticLockingFailureException.class)
-				.withFailMessage("saving an aggregate with an outdated version should raise an exception");
+		.withFailMessage("saving an aggregate with an outdated version should raise an exception").hasRootCauseInstanceOf(OptimisticLockingFailureException.class);
+				
 
 		reloadedAggregate.setVersion(toConcreteNumber.apply(3));
 		assertThatThrownBy(() -> template.save(reloadedAggregate))
-				.hasRootCauseInstanceOf(OptimisticLockingFailureException.class)
-				.withFailMessage("saving an aggregate with a future version should raise an exception");
+		.withFailMessage("saving an aggregate with a future version should raise an exception").hasRootCauseInstanceOf(OptimisticLockingFailureException.class);
+				
 	}
 
 	private Long count(String tableName) {
