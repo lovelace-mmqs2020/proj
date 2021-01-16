@@ -207,50 +207,7 @@ public class EntityRowMapperUnitTests {
 				.containsExactly(ID_FOR_ENTITY_NOT_REFERENCING_MAP, "alpha", 24L, "beta");
 	}
 
-	@Test // DATAJDBC-113
-	public void collectionReferenceGetsLoadedWithAdditionalSelect() throws SQLException {
-
-		ResultSet rs = mockResultSet(asList("ID", "NAME"), //
-				ID_FOR_ENTITY_NOT_REFERENCING_MAP, "alpha");
-		rs.next();
-
-		OneToSet extracted = createRowMapper(OneToSet.class).mapRow(rs, 1);
-
-		assertThat(extracted) //
-				.isNotNull() //
-				.extracting(e -> e.id, e -> e.name, e -> e.children.size()) //
-				.containsExactly(ID_FOR_ENTITY_NOT_REFERENCING_MAP, "alpha", 2);
-	}
-
-	@Test // DATAJDBC-131
-	public void mapReferenceGetsLoadedWithAdditionalSelect() throws SQLException {
-
-		ResultSet rs = mockResultSet(asList("ID", "NAME"), //
-				ID_FOR_ENTITY_REFERENCING_MAP, "alpha");
-		rs.next();
-
-		OneToMap extracted = createRowMapper(OneToMap.class).mapRow(rs, 1);
-
-		assertThat(extracted) //
-				.isNotNull() //
-				.extracting(e -> e.id, e -> e.name, e -> e.children.size()) //
-				.containsExactly(ID_FOR_ENTITY_REFERENCING_MAP, "alpha", 2);
-	}
-
-	@Test // DATAJDBC-130
-	public void listReferenceGetsLoadedWithAdditionalSelect() throws SQLException {
-
-		ResultSet rs = mockResultSet(asList("ID", "NAME"), //
-				ID_FOR_ENTITY_REFERENCING_LIST, "alpha");
-		rs.next();
-
-		OneToMap extracted = createRowMapper(OneToMap.class).mapRow(rs, 1);
-
-		assertThat(extracted) //
-				.isNotNull() //
-				.extracting(e -> e.id, e -> e.name, e -> e.children.size()) //
-				.containsExactly(ID_FOR_ENTITY_REFERENCING_LIST, "alpha", 2);
-	}
+	
 
 	@Test // DATAJDBC-252
 	public void doesNotTryToSetPropertiesThatAreSetViaConstructor() throws SQLException {
@@ -279,17 +236,7 @@ public class EntityRowMapperUnitTests {
 				.isEqualTo(new String[] { "111", "222", "333" });
 	}
 
-	@Test // DATAJDBC-273
-	public void handlesNonSimplePropertyInConstructor() throws SQLException {
-
-		ResultSet rs = mockResultSet(singletonList("ID"), //
-				ID_FOR_ENTITY_REFERENCING_LIST);
-		rs.next();
-
-		EntityWithListInConstructor extracted = createRowMapper(EntityWithListInConstructor.class).mapRow(rs, 1);
-
-		assertThat(extracted.content).hasSize(2);
-	}
+	
 
 	@Test // DATAJDBC-359
 	public void chainedEntitiesWithoutId() throws SQLException {
@@ -682,14 +629,7 @@ public class EntityRowMapperUnitTests {
 		doReturn(simpleEntriesWithInts).when(accessStrategy).findAllByProperty(eq(ID_FOR_ENTITY_REFERENCING_LIST),
 				any(RelationalPersistentProperty.class));
 
-		doReturn(trivials).when(accessStrategy).findAllByPath(eq(ID_FOR_ENTITY_NOT_REFERENCING_MAP),
-				any(PersistentPropertyPath.class));
-
-		doReturn(simpleEntriesWithStringKeys).when(accessStrategy)
-				.findAllByPath(eq(ID_FOR_ENTITY_REFERENCING_MAP), any(PersistentPropertyPath.class));
-
-		doReturn(simpleEntriesWithInts).when(accessStrategy)
-				.findAllByPath(eq(ID_FOR_ENTITY_REFERENCING_LIST), any(PersistentPropertyPath.class));
+		
 
 		BasicJdbcConverter converter = new BasicJdbcConverter(context, accessStrategy, new JdbcCustomConversions(),
 				JdbcTypeFactory.unsupported());
