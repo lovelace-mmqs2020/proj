@@ -166,6 +166,10 @@ class WritingContext {
 
 		Object id = context.getRequiredPersistentEntity(entityType).getIdentifierAccessor(entity).getIdentifier();
 
+		if (id == null) {
+			id = -1;
+		}
+
 		return new DbAction.Delete<>(id, path);
 	}
 
