@@ -49,6 +49,7 @@ import org.springframework.data.util.ClassTypeInformation;
 import org.springframework.data.util.TypeInformation;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
+import org.springframework.core.annotation.AnnotationUtils;
 
 /**
  * {@link RelationalConverter} that uses a {@link MappingContext} to apply basic conversion of relational values to
@@ -74,6 +75,7 @@ public class BasicJdbcConverter extends BasicRelationalConverter implements Jdbc
 	private final IdentifierProcessing identifierProcessing = HsqlDbDialect.INSTANCE.getIdentifierProcessing();
 
 	private final RelationResolver relationResolver;
+	private final String errore = "Errore";
 
 	/**
 	 * Creates a new {@link BasicRelationalConverter} given {@link MappingContext} and a
@@ -231,10 +233,10 @@ public class BasicJdbcConverter extends BasicRelationalConverter implements Jdbc
 			if (supertype != null) {
 				idType = supertype.getTypeArguments().get(1);
 			} else {
-				throw new NullPointerException("Error");
+				throw new NullPointerException(errore);
 			}
 		}  else {
-			throw new NullPointerException("Error");
+			throw new NullPointerException(errore);
 		}
 
 		return AggregateReference.to(readValue(value, idType));
@@ -474,7 +476,18 @@ public class BasicJdbcConverter extends BasicRelationalConverter implements Jdbc
 		}
 
 		private boolean shouldCreateEmptyEmbeddedInstance(RelationalPersistentProperty property) {
-			return OnEmpty.USE_EMPTY.equals(property.findAnnotation(Embedded.class).onEmpty());
+			boolean result = false;
+			if (property != null) {
+				try {
+					if (property.findAnnotation(Embedded.class) != null) {
+						Embedded embedded = property.findAnnotation(Embedded.class);
+						result = OnEmpty.USE_EMPTY.equals(embedded.onEmpty());
+					}
+				} catch(Exception e) {
+					throw new NullPointerException(errore);
+				}
+			}
+			return result;
 		}
 
 		private boolean hasInstanceValues(@Nullable Object idValue) {
