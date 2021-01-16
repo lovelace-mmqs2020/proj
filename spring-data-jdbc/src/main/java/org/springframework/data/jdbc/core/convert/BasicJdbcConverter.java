@@ -225,8 +225,17 @@ public class BasicJdbcConverter extends BasicRelationalConverter implements Jdbc
 
 	@SuppressWarnings("ConstantConditions")
 	private Object readAggregateReference(@Nullable Object value, TypeInformation<?> type) {
-
-		TypeInformation<?> idType = type.getSuperTypeInformation(AggregateReference.class).getTypeArguments().get(1);
+		TypeInformation<?> idType;
+		if (type != null) {
+			TypeInformation<?> supertype = type.getSuperTypeInformation(AggregateReference.class);
+			if (supertype != null) {
+				idType = supertype.getTypeArguments().get(1);
+			} else {
+				throw new NullPointerException("Error");
+			}
+		}  else {
+			throw new NullPointerException("Error");
+		}
 
 		return AggregateReference.to(readValue(value, idType));
 	}
