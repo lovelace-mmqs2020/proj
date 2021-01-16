@@ -682,14 +682,14 @@ public class EntityRowMapperUnitTests {
 		doReturn(simpleEntriesWithInts).when(accessStrategy).findAllByProperty(eq(ID_FOR_ENTITY_REFERENCING_LIST),
 				any(RelationalPersistentProperty.class));
 
-		doReturn(trivials).when(accessStrategy).findAllByPath(identifierOfValue(ID_FOR_ENTITY_NOT_REFERENCING_MAP),
+		doReturn(trivials).when(accessStrategy).findAllByPath(eq(ID_FOR_ENTITY_NOT_REFERENCING_MAP),
 				any(PersistentPropertyPath.class));
 
 		doReturn(simpleEntriesWithStringKeys).when(accessStrategy)
-				.findAllByPath(identifierOfValue(ID_FOR_ENTITY_REFERENCING_MAP), any(PersistentPropertyPath.class));
+				.findAllByPath(eq(ID_FOR_ENTITY_REFERENCING_MAP), any(PersistentPropertyPath.class));
 
 		doReturn(simpleEntriesWithInts).when(accessStrategy)
-				.findAllByPath(identifierOfValue(ID_FOR_ENTITY_REFERENCING_LIST), any(PersistentPropertyPath.class));
+				.findAllByPath(eq(ID_FOR_ENTITY_REFERENCING_LIST), any(PersistentPropertyPath.class));
 
 		BasicJdbcConverter converter = new BasicJdbcConverter(context, accessStrategy, new JdbcCustomConversions(),
 				JdbcTypeFactory.unsupported());
