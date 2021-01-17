@@ -49,6 +49,7 @@ import org.springframework.data.relational.domain.Identifier;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.util.Assert;
 import lombok.NonNull;
+import org.springframework.data.relational.core.mapping.RelationalPersistentEntity;
 
 /**
  * {@link DataAccessStrategy} implementation based on MyBatis. Each method gets mapped to a statement. The name of the
@@ -269,14 +270,32 @@ public class MyBatisDataAccessStrategy implements DataAccessStrategy {
 	 * @see org.springframework.data.jdbc.core.DataAccessStrategy#deleteAll(org.springframework.data.mapping.PersistentPropertyPath)
 	 */
 	@Override
-	public void deleteAll(PersistentPropertyPath<RelationalPersistentProperty> propertyPath) {
+	public void deleteAll(@NonNull PersistentPropertyPath<RelationalPersistentProperty> propertyPath) {
 
-		Class<?> baseType = propertyPath.getBaseProperty().getOwner().getType();
-		Class<?> leafType = propertyPath.getRequiredLeafProperty().getTypeInformation().getType();
+		Class<?> baseType; 
+		RelationalPersistentProperty propA;
+		RelationalPersistentProperty propB;
+		propA = propertyPath.getRequiredLeafProperty();
 
-		String statement = namespace(baseType) + ".deleteAll-" + toDashPath(propertyPath);
-		MyBatisContext parameter = new MyBatisContext(null, null, leafType, Collections.emptyMap());
-		sqlSession().delete(statement, parameter);
+		propB = propertyPath.getBaseProperty();
+
+		if ((propA == null) || (propB == null)) {
+
+			throw new NullPointerException("Error: prop is null");
+		}
+		else {
+			try {
+				baseType = propB.getOwner().getType();
+				Class<?> leafType = propA.getTypeInformation().getType();
+
+				String statement = namespace(baseType) + ".deleteAll-" + toDashPath(propertyPath);
+				MyBatisContext parameter = new MyBatisContext(null, null, leafType, Collections.emptyMap());
+				sqlSession().delete(statement, parameter);
+
+			} catch(Exception e) {
+				return;
+		}
+	}
 	}
 
 	/*
