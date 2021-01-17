@@ -25,6 +25,7 @@ import org.springframework.data.relational.core.sql.SqlIdentifier;
 import org.springframework.data.util.Lazy;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
+import lombok.NonNull;
 
 /**
  * A wrapper around a {@link org.springframework.data.mapping.PersistentPropertyPath} for making common operations
@@ -67,15 +68,19 @@ public class PersistentPropertyPathExtension {
 	 * @param path must not be {@literal null}.
 	 */
 	public PersistentPropertyPathExtension(
-			MappingContext<RelationalPersistentEntity<?>, RelationalPersistentProperty> context,
-			PersistentPropertyPath<RelationalPersistentProperty> path) {
+			@NonNull MappingContext<RelationalPersistentEntity<?>, RelationalPersistentProperty> context,
+			@NonNull PersistentPropertyPath<RelationalPersistentProperty> path) {
 
 		Assert.notNull(context, "Context must not be null.");
 		Assert.notNull(path, "Path must not be null.");
 		Assert.notNull(path.getBaseProperty(), "Path must not be empty.");
 
 		this.context = context;
-		this.entity = path.getBaseProperty().getOwner();
+		RelationalPersistentProperty property = path.getBaseProperty();
+		if (property == null) {
+			throw new NullPointerException("Error property is null");
+		}
+		this.entity = property.getOwner();
 		this.path = path;
 	}
 
