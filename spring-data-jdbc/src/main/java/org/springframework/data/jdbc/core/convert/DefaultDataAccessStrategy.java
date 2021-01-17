@@ -216,18 +216,24 @@ public class DefaultDataAccessStrategy implements DataAccessStrategy {
 	@Override
 	public void delete(Object rootId, PersistentPropertyPath<RelationalPersistentProperty> propertyPath) {
 
-		RelationalPersistentEntity<?> rootEntity = context
-				.getRequiredPersistentEntity(propertyPath.getBaseProperty().getOwner().getType());
-		if(rootEntity != null) {
-			RelationalPersistentProperty referencingProperty = propertyPath.getLeafProperty();
-		Assert.notNull(referencingProperty, "No property found matching the PropertyPath " + propertyPath);
+		RelationalPersistentEntity<?> rootEntity;
+		if(propertyPath != null) {
+			if(propertyPath.getBaseProperty()!=null){
+				if(propertyPath.getBaseProperty().getOwner()!=null){
+					rootEntity = context.getRequiredPersistentEntity(propertyPath.getBaseProperty().getOwner().getType());
+					if(rootEntity != null) {
+						RelationalPersistentProperty referencingProperty = propertyPath.getLeafProperty();
+						Assert.notNull(referencingProperty, "No property found matching the PropertyPath " + propertyPath);
 
-		String delete = sql(rootEntity.getType()).createDeleteByPath(propertyPath);
+						String delete = sql(rootEntity.getType()).createDeleteByPath(propertyPath);
 
-		SqlIdentifierParameterSource parameters = new SqlIdentifierParameterSource(getIdentifierProcessing());
-		parameters.addValue(ROOT_ID_PARAMETER, rootId);
-		operations.update(delete, parameters);
+						SqlIdentifierParameterSource parameters = new SqlIdentifierParameterSource(getIdentifierProcessing());
+						parameters.addValue(ROOT_ID_PARAMETER, rootId);
+						operations.update(delete, parameters);
 
+					}
+				}
+			}
 		}
 
 		
