@@ -27,6 +27,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import lombok.NonNull;
+
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -406,7 +408,21 @@ public class MyBatisDataAccessStrategy implements DataAccessStrategy {
 		return this.sqlSession;
 	}
 
-	private static String toDashPath(PersistentPropertyPath<RelationalPersistentProperty> propertyPath) {
-		return propertyPath.toDotPath().replaceAll("\\.", "-");
+	private static String toDashPath(@NonNull PersistentPropertyPath<RelationalPersistentProperty> propertyPath) {
+		String result = "";
+		String path = propertyPath.toDotPath();
+		if (path == null) {
+			throw new NullPointerException("Error: property is null");
+		}
+		else {
+			try {
+				result = path.replaceAll("\\.", "-");
+				
+			} catch(Exception e) {
+				return result;
+			}
+		}
+		return result;
 	}
+	
 }
