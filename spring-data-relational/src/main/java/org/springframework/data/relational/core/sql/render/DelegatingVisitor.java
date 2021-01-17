@@ -21,6 +21,7 @@ import org.springframework.data.relational.core.sql.Visitable;
 import org.springframework.data.relational.core.sql.Visitor;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
+import lombok.NonNull;
 
 /**
  * Abstract base class for delegating {@link Visitor} implementations. This class implements a delegation pattern using
@@ -65,16 +66,9 @@ abstract class DelegatingVisitor implements Visitor {
 	 * @see org.springframework.data.relational.core.sql.Visitor#enter(org.springframework.data.relational.core.sql.Visitable)
 	 */
 	@Override
-	public final void enter(Visitable segment) {
-
+	public final void enter(@NonNull Visitable segment) {
 		if (delegation.isEmpty()) {
-
 			Delegation visitor = doEnter(segment);
-			Assert.notNull(visitor,
-					() -> String.format("Visitor must not be null. Caused by %s.doEnter(…)", getClass().getName()));
-			Assert.state(!visitor.isLeave(),
-					() -> String.format("Delegation indicates leave. Caused by %s.doEnter(…)", getClass().getName()));
-
 			if (visitor.isDelegate()) {
 				delegation.push(visitor.getDelegate());
 				visitor.getDelegate().enter(segment);
