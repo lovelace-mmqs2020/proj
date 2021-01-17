@@ -18,6 +18,8 @@ package org.springframework.data.relational.core.mapping;
 import org.springframework.data.relational.core.sql.IdentifierProcessing;
 import org.springframework.data.util.ParsingUtils;
 import org.springframework.util.Assert;
+import org.springframework.data.relational.core.mapping.RelationalPersistentEntity;
+import lombok.NonNull;
 
 /**
  * Interface and default implementation of a naming strategy. Defaults to no schema, table name based on {@link Class}
@@ -96,9 +98,23 @@ public interface NamingStrategy {
 		return property.getOwner().getTableName().getReference(IdentifierProcessing.NONE);
 	}
 
-	default String getReverseColumnName(PersistentPropertyPathExtension path) {
-
-		return getTableName(path.getIdDefiningParentPath().getLeafEntity().getType());
+	default String getReverseColumnName(@NonNull PersistentPropertyPathExtension path) {
+		String result = "";
+		PersistentPropertyPathExtension prop = path.getIdDefiningParentPath();
+		RelationalPersistentEntity<?> relational;
+		if (prop == null) {
+			throw new NullPointerException("Error prop is null");
+		} else {
+			try{
+				relational = prop.getLeafEntity();
+				if (relational != null) {
+					result = getTableName(relational.getType());
+				}
+			} catch(Exception e) {
+				return result;
+			}
+		}
+		return result;
 	}
 
 	/**
