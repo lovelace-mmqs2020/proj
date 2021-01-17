@@ -54,10 +54,13 @@ public class DefaultJdbcTypeFactory implements JdbcTypeFactory {
 		Class<?> componentType = innermostComponentType(value);
 
 		JDBCType jdbcType = JdbcUtil.jdbcTypeFor(componentType);
-		Assert.notNull(jdbcType, () -> String.format("Couldn't determine JDBCType for %s", componentType));
+		if(jdbcType != null) {
+			Assert.notNull(jdbcType, () -> String.format("Couldn't determine JDBCType for %s", componentType));
 		String typeName = jdbcType.getName();
 
 		return operations.execute((ConnectionCallback<Array>) c -> c.createArrayOf(typeName, value));
+		}
+		else return null;
 	}
 
 	private static Class<?> innermostComponentType(Object convertedValue) {

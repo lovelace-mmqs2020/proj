@@ -208,7 +208,6 @@ public class EntityRowMapperUnitTests {
 	}
 
 	
-
 	@Test // DATAJDBC-252
 	public void doesNotTryToSetPropertiesThatAreSetViaConstructor() throws SQLException {
 

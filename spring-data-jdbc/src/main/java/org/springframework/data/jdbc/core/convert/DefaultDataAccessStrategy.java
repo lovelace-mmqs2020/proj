@@ -218,8 +218,8 @@ public class DefaultDataAccessStrategy implements DataAccessStrategy {
 
 		RelationalPersistentEntity<?> rootEntity = context
 				.getRequiredPersistentEntity(propertyPath.getBaseProperty().getOwner().getType());
-
-		RelationalPersistentProperty referencingProperty = propertyPath.getLeafProperty();
+		if(rootEntity != null) {
+			RelationalPersistentProperty referencingProperty = propertyPath.getLeafProperty();
 		Assert.notNull(referencingProperty, "No property found matching the PropertyPath " + propertyPath);
 
 		String delete = sql(rootEntity.getType()).createDeleteByPath(propertyPath);
@@ -227,6 +227,10 @@ public class DefaultDataAccessStrategy implements DataAccessStrategy {
 		SqlIdentifierParameterSource parameters = new SqlIdentifierParameterSource(getIdentifierProcessing());
 		parameters.addValue(ROOT_ID_PARAMETER, rootId);
 		operations.update(delete, parameters);
+
+		}
+
+		
 	}
 
 	/*

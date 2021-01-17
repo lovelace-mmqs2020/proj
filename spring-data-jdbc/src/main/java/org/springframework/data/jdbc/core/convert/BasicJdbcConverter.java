@@ -144,7 +144,7 @@ public class BasicJdbcConverter extends BasicRelationalConverter implements Jdbc
 		return getColumnType(referencedEntity.getRequiredIdProperty());
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
 	 * @see org.springframework.data.jdbc.core.convert.JdbcConverter#getSqlType(org.springframework.data.relational.core.mapping.RelationalPersistentProperty)
 	 */
@@ -153,7 +153,7 @@ public class BasicJdbcConverter extends BasicRelationalConverter implements Jdbc
 		return JdbcUtil.sqlTypeFor(getColumnType(property));
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
 	 * @see org.springframework.data.jdbc.core.convert.JdbcConverter#getColumnType(org.springframework.data.relational.core.mapping.RelationalPersistentProperty)
 	 */
