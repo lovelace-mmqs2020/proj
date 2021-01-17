@@ -69,6 +69,9 @@ abstract class DelegatingVisitor implements Visitor {
 	public final void enter(@NonNull Visitable segment) {
 		if (delegation.isEmpty()) {
 			Delegation visitor = doEnter(segment);
+			if (visitor == null) {
+				throw new NullPointerException("Error visitor is null");
+			}
 			if (visitor.isDelegate()) {
 				delegation.push(visitor.getDelegate());
 				visitor.getDelegate().enter(segment);
