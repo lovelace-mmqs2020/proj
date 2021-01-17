@@ -272,7 +272,7 @@ public class MyBatisDataAccessStrategy implements DataAccessStrategy {
 	@Override
 	public void deleteAll(@NonNull PersistentPropertyPath<RelationalPersistentProperty> propertyPath) {
 
-		Class<?> baseType; 
+		Class<?> baseType;
 		RelationalPersistentProperty propA;
 		RelationalPersistentProperty propB;
 		propA = propertyPath.getRequiredLeafProperty();
@@ -333,10 +333,14 @@ public class MyBatisDataAccessStrategy implements DataAccessStrategy {
 	}
 
 	@Override
-	public Iterable<Object> findAllByPath(Identifier identifier,
-			PersistentPropertyPath<RelationalPersistentProperty> path) {
+	public Iterable<Object> findAllByPath(@NonNull Identifier identifier,
+			@NonNull PersistentPropertyPath<RelationalPersistentProperty> path) {
 
-		String statementName = namespace(path.getBaseProperty().getOwner().getType()) + ".findAllByPath-"
+		RelationalPersistentProperty prop = path.getBaseProperty();
+		if (prop == null) {
+			throw new NullPointerException("Error prop is null");
+		}
+		String statementName = namespace(prop.getOwner().getType()) + ".findAllByPath-"
 				+ path.toDotPath();
 
 		try {
@@ -436,12 +440,12 @@ public class MyBatisDataAccessStrategy implements DataAccessStrategy {
 		else {
 			try {
 				result = path.replaceAll("\\.", "-");
-				
+
 			} catch(Exception e) {
 				return result;
 			}
 		}
 		return result;
 	}
-	
+
 }
