@@ -478,16 +478,13 @@ public class BasicJdbcConverter extends BasicRelationalConverter implements Jdbc
 		private boolean shouldCreateEmptyEmbeddedInstance(RelationalPersistentProperty property) {
 			boolean result = false;
 			if (property != null) {
-				try {
-					if (property.findAnnotation(Embedded.class) != null) {
-						Embedded embedded = property.findAnnotation(Embedded.class);
-						result = OnEmpty.USE_EMPTY.equals(embedded.onEmpty());
-					}
-				} catch(Exception e) {
-					throw new NullPointerException(errore);
+				
+					a = property.findAnnotation(Embedded.class);
+				if(a != null) {
+					return OnEmpty.USE_EMPTY.equals(a.onEmpty());
 				}
 			}
-			return result;
+			return OnEmpty.USE_EMPTY.equals(a.onEmpty());
 		}
 
 		private boolean hasInstanceValues(@Nullable Object idValue) {
