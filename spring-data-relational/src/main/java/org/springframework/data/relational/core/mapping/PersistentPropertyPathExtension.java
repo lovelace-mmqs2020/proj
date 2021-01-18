@@ -42,6 +42,7 @@ public class PersistentPropertyPathExtension {
 	private final MappingContext<RelationalPersistentEntity<?>, RelationalPersistentProperty> context;
 
 	private final Lazy<SqlIdentifier> columnAlias = Lazy.of(() -> prefixWithTableAlias(getColumnName()));
+	private final String pathErrorMessage = "Path is null";
 
 	/**
 	 * Creates the empty path referencing the root itself.
@@ -186,7 +187,7 @@ public class PersistentPropertyPathExtension {
 	 */
 	public SqlIdentifier getColumnName() {
 
-		Assert.state(path != null, "Path is null");
+		Assert.state(path != null, pathErrorMessage);
 
 		return assembleColumnName(path.getRequiredLeafProperty().getColumnName());
 	}
@@ -392,7 +393,7 @@ public class PersistentPropertyPathExtension {
 
 	private SqlIdentifier assembleTableAlias() {
 
-		Assert.state(path != null, "Path is null");
+		Assert.state(path != null, pathErrorMessage);
 
 		RelationalPersistentProperty leafProperty = path.getRequiredLeafProperty();
 		String prefix = isEmbedded() ? leafProperty.getEmbeddedPrefix() : leafProperty.getName();
@@ -412,7 +413,7 @@ public class PersistentPropertyPathExtension {
 
 	private SqlIdentifier assembleColumnName(SqlIdentifier suffix) {
 
-		Assert.state(path != null, "Path is null");
+		Assert.state(path != null, pathErrorMessage);
 
 		if (path.getLength() <= 1) {
 			return suffix;
