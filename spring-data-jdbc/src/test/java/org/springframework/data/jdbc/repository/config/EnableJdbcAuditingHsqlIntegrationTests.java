@@ -131,11 +131,12 @@ public class EnableJdbcAuditingHsqlIntegrationTests {
 							softly.assertThat(entity.id).isNotNull();
 							softly.assertThat(repository.findById(entity.id).get()).isEqualTo(entity);
 
-							softly.assertAll();
+							
 
 							entity = repository.save(entity);
 
-							assertThat(repository.findById(entity.id)).contains(entity);
+							softly.assertThat(repository.findById(entity.id)).contains(entity);
+							softly.assertAll();
 						});
 	}
 
@@ -158,6 +159,7 @@ public class EnableJdbcAuditingHsqlIntegrationTests {
 							softly.assertThat(entity.getCreatedDate()).isEqualTo(currentDateTime);
 							softly.assertThat(entity.getLastModifiedBy()).isNull();
 							softly.assertThat(entity.getLastModifiedDate()).isNull();
+							softly.assertAll();
 						});
 	}
 
@@ -177,6 +179,7 @@ public class EnableJdbcAuditingHsqlIntegrationTests {
 							softly.assertThat(entity.getCreatedDate()).isNull();
 							softly.assertThat(entity.getLastModifiedBy()).isEqualTo("user");
 							softly.assertThat(entity.getLastModifiedDate()).isNull();
+							softly.assertAll();
 						});
 	}
 
@@ -194,7 +197,8 @@ public class EnableJdbcAuditingHsqlIntegrationTests {
 
 					AuditingAnnotatedDummyEntity entity = repository.save(new AuditingAnnotatedDummyEntity());
 
-					assertThat(entity.id).isNotEqualTo(-1);
+					softly.assertThat(entity.id).isNotEqualTo(-1);
+					softly.assertAll();
 				});
 	}
 
@@ -220,7 +224,7 @@ public class EnableJdbcAuditingHsqlIntegrationTests {
 
 				test.accept(context.getBean(repositoryType));
 
-				softly.assertAll();
+				
 			}
 		};
 	}
