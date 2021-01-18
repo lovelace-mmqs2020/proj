@@ -267,7 +267,7 @@ public interface DbAction<T> {
 		 */
 		Map<PersistentPropertyPath<RelationalPersistentProperty>, Object> getQualifiers();
 
-		// TODO: Encapsulate propertyPath and qualifier in object: PropertyPathWithListIndex,
+		
 		// PropertyPathWithMapIndex, PropertyPathInSet, PropertyPathWithoutQualifier
 		// Probably we need better names.
 		@Nullable

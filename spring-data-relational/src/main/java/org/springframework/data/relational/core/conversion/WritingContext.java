@@ -215,7 +215,7 @@ class WritingContext {
 
 			pathNodes.forEach(parentNode -> {
 
-				// todo: this should go into pathnode
+	
 				Object parentValue = parentNode.getActualValue();
 
 				Object value = path.getRequiredLeafProperty().getOwner().getPropertyAccessor(parentValue)
