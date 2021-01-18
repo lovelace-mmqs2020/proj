@@ -318,8 +318,8 @@ public class JdbcAggregateTemplateIntegrationTests {
 
 		SoftAssertions softly = new SoftAssertions();
 
-		assertThat(template.findAll(LegoSet.class)).isEmpty();
-		assertThat(template.findAll(Manual.class)).isEmpty();
+		softly.assertThat(template.findAll(LegoSet.class)).isEmpty();
+		softly.assertThat(template.findAll(Manual.class)).isEmpty();
 
 		softly.assertAll();
 	}
@@ -833,15 +833,7 @@ public class JdbcAggregateTemplateIntegrationTests {
 		saveAndUpdateAggregateWithVersion(new AggregateWithPrimitiveShortVersion(), Number::shortValue);
 	}
 
-	@Test // DATAJDBC-462
-	public void resavingAnUnversionedEntity() {
-
-		LegoSet legoSet = new LegoSet();
-
-		LegoSet saved = template.save(legoSet);
-
-		template.save(saved);
-	}
+	
 
 	private <T extends Number> void saveAndUpdateAggregateWithVersion(VersionedAggregate aggregate,
 			Function<Number, T> toConcreteNumber) {
