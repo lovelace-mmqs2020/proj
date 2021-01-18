@@ -63,13 +63,7 @@ public class MyBatisHsqlIntegrationTests {
 	@Autowired SqlSessionFactory sqlSessionFactory;
 	@Autowired DummyEntityRepository repository;
 
-	@Test // DATAJDBC-123
-	public void mybatisSelfTest() {
-
-		SqlSession session = sqlSessionFactory.openSession();
-
-		session.selectList("org.springframework.data.jdbc.mybatis.DummyEntityMapper.findById");
-	}
+	
 
 	@Test // DATAJDBC-123
 	public void myBatisGetsUsedForInsertAndSelect() {
