@@ -148,8 +148,8 @@ abstract class DelegatingVisitor implements Visitor {
 	 */
 	static class Delegation {
 
-		private static Delegation RETAIN = new Delegation(true, false, null);
-		private static Delegation LEAVE = new Delegation(false, true, null);
+		private static Delegation RETAINV = new Delegation(true, false, null);
+		private static Delegation LEAVEV = new Delegation(false, true, null);
 
 		private final boolean retain;
 		private final boolean leave;
@@ -163,11 +163,11 @@ abstract class DelegatingVisitor implements Visitor {
 		}
 
 		public static Delegation retain() {
-			return RETAIN;
+			return RETAINV;
 		}
 
 		public static Delegation leave() {
-			return LEAVE;
+			return LEAVEV;
 		}
 
 		public static Delegation delegateTo(DelegatingVisitor visitor) {
