@@ -27,12 +27,4 @@ import org.springframework.data.jdbc.core.convert.DataAccessStrategy;
  * @author Mark Paluch
  * @deprecated since 1.1, use {@link org.springframework.data.jdbc.core.convert.CascadingDataAccessStrategy}
  */
-@Deprecated
-public class CascadingDataAccessStrategy
-		extends org.springframework.data.jdbc.core.convert.CascadingDataAccessStrategy {
 
-	public CascadingDataAccessStrategy(List<DataAccessStrategy> strategies) {
-		super(strategies);
-	}
-
-}

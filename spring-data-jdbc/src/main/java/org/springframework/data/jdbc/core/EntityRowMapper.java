@@ -23,11 +23,5 @@ import org.springframework.data.relational.core.mapping.RelationalPersistentEnti
  * @author Jens Schauder
  * @deprecated since 1.1, use {@link org.springframework.data.jdbc.core.convert.EntityRowMapper} instead.
  */
-@Deprecated
-public class EntityRowMapper<T> extends org.springframework.data.jdbc.core.convert.EntityRowMapper<T> {
 
-	public EntityRowMapper(RelationalPersistentEntity<T> entity, JdbcConverter converter,
-			DataAccessStrategy accessStrategy) {
-		super(entity, converter);
-	}
-}
+

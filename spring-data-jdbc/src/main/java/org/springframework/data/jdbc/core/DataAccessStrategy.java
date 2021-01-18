@@ -24,5 +24,4 @@ package org.springframework.data.jdbc.core;
  * @author Mark Paluch
  * @deprecated since 1.1, use {@link org.springframework.data.jdbc.core.convert.DataAccessStrategy}
  */
-@Deprecated
-public interface DataAccessStrategy extends org.springframework.data.jdbc.core.convert.DataAccessStrategy {}
+
