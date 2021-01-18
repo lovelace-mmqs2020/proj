@@ -67,6 +67,9 @@ public class JdbcAggregateTemplate implements JdbcAggregateOperations {
 	private final AggregateChangeExecutor executor;
 
 	private EntityCallbacks entityCallbacks = EntityCallbacks.create();
+	private final String aggregateErrorMessage = "Aggregate instance must not be null!";
+	private final String idErrorMessage = "Id must not be null!";
+	private final String domainErrorMessage = "Domain type must not be null!";
 
 	/**
 	 * Creates a new {@link JdbcAggregateTemplate} given {@link ApplicationContext}, {@link RelationalMappingContext} and
@@ -144,7 +147,7 @@ public class JdbcAggregateTemplate implements JdbcAggregateOperations {
 	@Override
 	public <T> T save(T instance) {
 
-		Assert.notNull(instance, "Aggregate instance must not be null!");
+		Assert.notNull(instance, aggregateErrorMessage);
 
 		RelationalPersistentEntity<?> persistentEntity = context.getRequiredPersistentEntity(instance.getClass());
 
@@ -164,7 +167,7 @@ public class JdbcAggregateTemplate implements JdbcAggregateOperations {
 	@Override
 	public <T> T insert(T instance) {
 
-		Assert.notNull(instance, "Aggregate instance must not be null!");
+		Assert.notNull(instance, aggregateErrorMessage);
 
 		RelationalPersistentEntity<?> persistentEntity = context.getRequiredPersistentEntity(instance.getClass());
 
@@ -181,7 +184,7 @@ public class JdbcAggregateTemplate implements JdbcAggregateOperations {
 	@Override
 	public <T> T update(T instance) {
 
-		Assert.notNull(instance, "Aggregate instance must not be null!");
+		Assert.notNull(instance, aggregateErrorMessage);
 
 		RelationalPersistentEntity<?> persistentEntity = context.getRequiredPersistentEntity(instance.getClass());
 
@@ -207,8 +210,8 @@ public class JdbcAggregateTemplate implements JdbcAggregateOperations {
 	@Override
 	public <T> T findById(Object id, Class<T> domainType) {
 
-		Assert.notNull(id, "Id must not be null!");
-		Assert.notNull(domainType, "Domain type must not be null!");
+		Assert.notNull(id, idErrorMessage);
+		Assert.notNull(domainType, domainErrorMessage);
 
 		T entity = accessStrategy.findById(id, domainType);
 		if (entity != null) {
@@ -224,8 +227,8 @@ public class JdbcAggregateTemplate implements JdbcAggregateOperations {
 	@Override
 	public <T> boolean existsById(Object id, Class<T> domainType) {
 
-		Assert.notNull(id, "Id must not be null!");
-		Assert.notNull(domainType, "Domain type must not be null!");
+		Assert.notNull(id, idErrorMessage);
+		Assert.notNull(domainType, domainErrorMessage);
 
 		return accessStrategy.existsById(id, domainType);
 	}
@@ -237,7 +240,7 @@ public class JdbcAggregateTemplate implements JdbcAggregateOperations {
 	@Override
 	public <T> Iterable<T> findAll(Class<T> domainType, Sort sort) {
 
-		Assert.notNull(domainType, "Domain type must not be null!");
+		Assert.notNull(domainType, domainErrorMessage);
 
 		Iterable<T> all = accessStrategy.findAll(domainType, sort);
 		return triggerAfterLoad(all);
@@ -250,7 +253,7 @@ public class JdbcAggregateTemplate implements JdbcAggregateOperations {
 	@Override
 	public <T> Page<T> findAll(Class<T> domainType, Pageable pageable) {
 
-		Assert.notNull(domainType, "Domain type must not be null!");
+		Assert.notNull(domainType, domainErrorMessage);
 
 		Iterable<T> items = triggerAfterLoad(accessStrategy.findAll(domainType, pageable));
 		long totalCount = accessStrategy.count(domainType);
@@ -266,7 +269,7 @@ public class JdbcAggregateTemplate implements JdbcAggregateOperations {
 	@Override
 	public <T> Iterable<T> findAll(Class<T> domainType) {
 
-		Assert.notNull(domainType, "Domain type must not be null!");
+		Assert.notNull(domainType, domainErrorMessage);
 
 		Iterable<T> all = accessStrategy.findAll(domainType);
 		return triggerAfterLoad(all);
@@ -280,7 +283,7 @@ public class JdbcAggregateTemplate implements JdbcAggregateOperations {
 	public <T> Iterable<T> findAllById(Iterable<?> ids, Class<T> domainType) {
 
 		Assert.notNull(ids, "Ids must not be null!");
-		Assert.notNull(domainType, "Domain type must not be null!");
+		Assert.notNull(domainType, domainErrorMessage);
 
 		Iterable<T> allById = accessStrategy.findAllById(ids, domainType);
 		return triggerAfterLoad(allById);
@@ -294,7 +297,7 @@ public class JdbcAggregateTemplate implements JdbcAggregateOperations {
 	public <S> void delete(S aggregateRoot, Class<S> domainType) {
 
 		Assert.notNull(aggregateRoot, "Aggregate root must not be null!");
-		Assert.notNull(domainType, "Domain type must not be null!");
+		Assert.notNull(domainType, domainErrorMessage);
 
 		IdentifierAccessor identifierAccessor = context.getRequiredPersistentEntity(domainType)
 				.getIdentifierAccessor(aggregateRoot);
@@ -309,8 +312,8 @@ public class JdbcAggregateTemplate implements JdbcAggregateOperations {
 	@Override
 	public <S> void deleteById(Object id, Class<S> domainType) {
 
-		Assert.notNull(id, "Id must not be null!");
-		Assert.notNull(domainType, "Domain type must not be null!");
+		Assert.notNull(id, idErrorMessage);
+		Assert.notNull(domainType, domainErrorMessage);
 
 		deleteTree(id, null, domainType);
 	}
@@ -322,7 +325,7 @@ public class JdbcAggregateTemplate implements JdbcAggregateOperations {
 	@Override
 	public void deleteAll(Class<?> domainType) {
 
-		Assert.notNull(domainType, "Domain type must not be null!");
+		Assert.notNull(domainType, domainErrorMessage);
 
 		AggregateChange<?> change = createDeletingChange(domainType);
 		executor.execute(change);
@@ -331,7 +334,7 @@ public class JdbcAggregateTemplate implements JdbcAggregateOperations {
 	private <T> T store(T aggregateRoot, Function<T, AggregateChange<T>> changeCreator,
 			RelationalPersistentEntity<?> persistentEntity) {
 
-		Assert.notNull(aggregateRoot, "Aggregate instance must not be null!");
+		Assert.notNull(aggregateRoot, aggregateErrorMessage);
 
 		aggregateRoot = triggerBeforeConvert(aggregateRoot);
 
