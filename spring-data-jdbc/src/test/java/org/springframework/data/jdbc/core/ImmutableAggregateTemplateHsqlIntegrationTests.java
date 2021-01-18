@@ -181,9 +181,8 @@ public class ImmutableAggregateTemplateHsqlIntegrationTests {
 
 		SoftAssertions softly = new SoftAssertions();
 
-		assertThat(template.findAll(LegoSet.class)).isEmpty();
-		assertThat(template.findAll(Manual.class)).isEmpty();
-
+		softly.assertThat(template.findAll(LegoSet.class)).isEmpty();
+		softly.assertThat(template.findAll(Manual.class)).isEmpty();
 		softly.assertAll();
 	}
 
