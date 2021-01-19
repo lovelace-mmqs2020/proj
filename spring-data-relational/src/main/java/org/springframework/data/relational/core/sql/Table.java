@@ -34,6 +34,7 @@ import org.springframework.util.Assert;
 public class Table extends AbstractSegment {
 
 	private final SqlIdentifier name;
+	private final static String CONSTANT = "Names must not be null";
 
 	Table(String name) {
 		this.name = SqlIdentifier.unquoted(name);
@@ -156,7 +157,7 @@ public class Table extends AbstractSegment {
 	 */
 	public List<Column> columns(String... names) {
 
-		Assert.notNull(names, "Names must not be null");
+		Assert.notNull(names, CONSTANT);
 
 		return columns(Arrays.asList(names));
 	}
@@ -173,7 +174,7 @@ public class Table extends AbstractSegment {
 	 */
 	public List<Column> columns(SqlIdentifier... names) {
 
-		Assert.notNull(names, "Names must not be null");
+		Assert.notNull(names, CONSTANT);
 
 		List<Column> columns = new ArrayList<>();
 		for (SqlIdentifier name : names) {
@@ -194,7 +195,7 @@ public class Table extends AbstractSegment {
 	 */
 	public List<Column> columns(Collection<String> names) {
 
-		Assert.notNull(names, "Names must not be null");
+		Assert.notNull(names, CONSTANT);
 
 		List<Column> columns = new ArrayList<>();
 		for (String name : names) {

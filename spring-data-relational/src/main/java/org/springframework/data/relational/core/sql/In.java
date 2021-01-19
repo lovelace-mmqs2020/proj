@@ -36,6 +36,9 @@ public class In extends AbstractSegment implements Condition {
 	private final Collection<Expression> expressions;
 	private final boolean notIn;
 
+	private static final String  CONSTANT_A = "Comparison column or expression must not be null";
+	private static final String  CONSTANT_B = "Expression argument must not be null";
+
 	private In(Expression left, Collection<Expression> expressions, boolean notIn) {
 
 		super(toArray(left, expressions));
@@ -68,8 +71,8 @@ public class In extends AbstractSegment implements Condition {
 	 */
 	public static In create(Expression columnOrExpression, Expression arg) {
 
-		Assert.notNull(columnOrExpression, "Comparison column or expression must not be null");
-		Assert.notNull(arg, "Expression argument must not be null");
+		Assert.notNull(columnOrExpression, CONSTANT_A);
+		Assert.notNull(arg, CONSTANT_B);
 
 		return new In(columnOrExpression, Collections.singletonList(arg), false);
 	}
@@ -83,8 +86,8 @@ public class In extends AbstractSegment implements Condition {
 	 */
 	public static In create(Expression columnOrExpression, Collection<? extends Expression> expressions) {
 
-		Assert.notNull(columnOrExpression, "Comparison column or expression must not be null");
-		Assert.notNull(expressions, "Expression argument must not be null");
+		Assert.notNull(columnOrExpression, CONSTANT_A);
+		Assert.notNull(expressions, CONSTANT_B);
 
 		return new In(columnOrExpression, new ArrayList<>(expressions), false);
 	}
@@ -98,8 +101,8 @@ public class In extends AbstractSegment implements Condition {
 	 */
 	public static In create(Expression columnOrExpression, Expression... expressions) {
 
-		Assert.notNull(columnOrExpression, "Comparison column or expression must not be null");
-		Assert.notNull(expressions, "Expression argument must not be null");
+		Assert.notNull(columnOrExpression, CONSTANT_A);
+		Assert.notNull(expressions, CONSTANT_B);
 
 		return new In(columnOrExpression, Arrays.asList(expressions), false);
 	}
@@ -113,8 +116,8 @@ public class In extends AbstractSegment implements Condition {
 	 */
 	public static In createNotIn(Expression columnOrExpression, Expression arg) {
 
-		Assert.notNull(columnOrExpression, "Comparison column or expression must not be null");
-		Assert.notNull(arg, "Expression argument must not be null");
+		Assert.notNull(columnOrExpression, CONSTANT_A);
+		Assert.notNull(arg, CONSTANT_B);
 
 		return new In(columnOrExpression, Collections.singletonList(arg), true);
 	}
@@ -128,8 +131,8 @@ public class In extends AbstractSegment implements Condition {
 	 */
 	public static In createNotIn(Expression columnOrExpression, Collection<? extends Expression> expressions) {
 
-		Assert.notNull(columnOrExpression, "Comparison column or expression must not be null");
-		Assert.notNull(expressions, "Expression argument must not be null");
+		Assert.notNull(columnOrExpression, CONSTANT_A);
+		Assert.notNull(expressions, CONSTANT_B);
 
 		return new In(columnOrExpression, new ArrayList<>(expressions), true);
 	}
@@ -143,13 +146,13 @@ public class In extends AbstractSegment implements Condition {
 	 */
 	public static In createNotIn(Expression columnOrExpression, Expression... expressions) {
 
-		Assert.notNull(columnOrExpression, "Comparison column or expression must not be null");
-		Assert.notNull(expressions, "Expression argument must not be null");
+		Assert.notNull(columnOrExpression, CONSTANT_A);
+		Assert.notNull(expressions, CONSTANT_B);
 
 		return new In(columnOrExpression, Arrays.asList(expressions), true);
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
 	 * @see org.springframework.data.relational.core.sql.Condition#not()
 	 */

@@ -37,7 +37,8 @@ class DefaultUpdateBuilder implements UpdateBuilder, UpdateWhere, UpdateWhereAnd
 	private @Nullable Table table;
 	private List<Assignment> assignments = new ArrayList<>();
 	private @Nullable Condition where;
-
+	private static final String CONSTANT_A = "Assignment must not be null!";
+	private static final String CONSTANT_B = "Condition must not be null!";
 	/*
 	 * (non-Javadoc)
 	 * @see org.springframework.data.relational.core.sql.UpdateBuilder#table(org.springframework.data.relational.core.sql.Table)
@@ -59,7 +60,7 @@ class DefaultUpdateBuilder implements UpdateBuilder, UpdateWhere, UpdateWhereAnd
 	@Override
 	public DefaultUpdateBuilder set(Assignment assignment) {
 
-		Assert.notNull(assignment, "Assignment must not be null!");
+		Assert.notNull(assignment, CONSTANT_A);
 
 		this.assignments.add(assignment);
 
@@ -73,7 +74,7 @@ class DefaultUpdateBuilder implements UpdateBuilder, UpdateWhere, UpdateWhereAnd
 	@Override
 	public UpdateWhere set(Assignment... assignments) {
 
-		Assert.notNull(assignments, "Assignment must not be null!");
+		Assert.notNull(assignments, CONSTANT_A);
 
 		return set(Arrays.asList(assignments));
 	}
@@ -85,7 +86,7 @@ class DefaultUpdateBuilder implements UpdateBuilder, UpdateWhere, UpdateWhereAnd
 	@Override
 	public UpdateWhere set(Collection<? extends Assignment> assignments) {
 
-		Assert.notNull(assignments, "Assignment must not be null!");
+		Assert.notNull(assignments, CONSTANT_A);
 
 		this.assignments.addAll(assignments);
 
@@ -99,7 +100,7 @@ class DefaultUpdateBuilder implements UpdateBuilder, UpdateWhere, UpdateWhereAnd
 	@Override
 	public UpdateWhereAndOr where(Condition condition) {
 
-		Assert.notNull(condition, "Condition must not be null!");
+		Assert.notNull(condition, CONSTANT_B);
 
 		this.where = condition;
 
@@ -113,7 +114,7 @@ class DefaultUpdateBuilder implements UpdateBuilder, UpdateWhere, UpdateWhereAnd
 	@Override
 	public UpdateWhereAndOr and(Condition condition) {
 
-		Assert.notNull(condition, "Condition must not be null!");
+		Assert.notNull(condition, CONSTANT_B);
 
 		this.where = this.where.and(condition);
 
@@ -127,7 +128,7 @@ class DefaultUpdateBuilder implements UpdateBuilder, UpdateWhere, UpdateWhereAnd
 	@Override
 	public UpdateWhereAndOr or(Condition condition) {
 
-		Assert.notNull(condition, "Condition must not be null!");
+		Assert.notNull(condition, CONSTANT_B);
 
 		this.where = this.where.and(condition);
 
