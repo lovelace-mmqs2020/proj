@@ -31,13 +31,13 @@ public class Column extends AbstractSegment implements Expression, Named {
 
 	private final SqlIdentifier name;
 	private final Table table;
-	private final String nameErrorMessage = "Name must not be null";
-	private final String tableErrorMessage = "Table must not be null";
+	private static final String NAME_ERROR_MESSAGE = "Name must not be null";
+	private static final String TABLE_ERROR_MESSAGE = "Table must not be null";
 
 	Column(String name, Table table) {
 
 		super(table);
-		Assert.notNull(name, nameErrorMessage);
+		Assert.notNull(name, NAME_ERROR_MESSAGE);
 
 		this.name = SqlIdentifier.unquoted(name);
 		this.table = table;
@@ -46,7 +46,7 @@ public class Column extends AbstractSegment implements Expression, Named {
 	Column(SqlIdentifier name, Table table) {
 
 		super(table);
-		Assert.notNull(name, nameErrorMessage);
+		Assert.notNull(name, NAME_ERROR_MESSAGE);
 
 		this.name = name;
 		this.table = table;
@@ -62,7 +62,7 @@ public class Column extends AbstractSegment implements Expression, Named {
 	public static Column create(String name, Table table) {
 
 		Assert.hasText(name, "Name must not be null or empty");
-		Assert.notNull(table, tableErrorMessage);
+		Assert.notNull(table, TABLE_ERROR_MESSAGE);
 
 		return new Column(SqlIdentifier.unquoted(name), table);
 	}
@@ -77,8 +77,8 @@ public class Column extends AbstractSegment implements Expression, Named {
 	 */
 	public static Column create(SqlIdentifier name, Table table) {
 
-		Assert.notNull(name, nameErrorMessage);
-		Assert.notNull(table, tableErrorMessage);
+		Assert.notNull(name, NAME_ERROR_MESSAGE);
+		Assert.notNull(table, TABLE_ERROR_MESSAGE);
 
 		return new Column(name, table);
 	}
@@ -94,7 +94,7 @@ public class Column extends AbstractSegment implements Expression, Named {
 	public static Column aliased(String name, Table table, String alias) {
 
 		Assert.hasText(name, "Name must not be null or empty");
-		Assert.notNull(table, tableErrorMessage);
+		Assert.notNull(table, TABLE_ERROR_MESSAGE);
 		Assert.hasText(alias, "Alias must not be null or empty");
 
 		return new AliasedColumn(name, table, alias);
@@ -135,7 +135,7 @@ public class Column extends AbstractSegment implements Expression, Named {
 	 */
 	public Column from(Table table) {
 
-		Assert.notNull(table, tableErrorMessage);
+		Assert.notNull(table, TABLE_ERROR_MESSAGE);
 
 		return new Column(name, table);
 	}
@@ -372,7 +372,7 @@ public class Column extends AbstractSegment implements Expression, Named {
 		@Override
 		public Column from(Table table) {
 
-			Assert.notNull(table, tableErrorMessage);
+			Assert.notNull(table, TABLE_ERROR_MESSAGE);
 
 			return new AliasedColumn(getName(), table, getAlias());
 		}
