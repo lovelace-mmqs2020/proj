@@ -125,9 +125,8 @@ public class JdbcRepositoryFactoryBean<T extends Repository<S, ID>, S, ID extend
 	/**
 	 * @param rowMapperMap can be {@literal null}. {@link #afterPropertiesSet()} defaults to {@link RowMapperMap#EMPTY} if
 	 *          {@literal null}.
-	 * @deprecated use {@link #setQueryMappingConfiguration(QueryMappingConfiguration)} instead.
 	 */
-	@Deprecated
+	
 	@Autowired(required = false)
 	public void setRowMapperMap(RowMapperMap rowMapperMap) {
 		setQueryMappingConfiguration(rowMapperMap);
