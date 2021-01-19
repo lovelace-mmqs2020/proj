@@ -59,7 +59,6 @@ public class BasicRelationalPersistentProperty extends AnnotationBasedPersistent
 	 * @since 2.0, use
 	 *        {@link #BasicRelationalPersistentProperty(Property, PersistentEntity, SimpleTypeHolder, NamingStrategy)}.
 	 */
-	@Deprecated
 	public BasicRelationalPersistentProperty(Property property, PersistentEntity<?, RelationalPersistentProperty> owner,
 			SimpleTypeHolder simpleTypeHolder, RelationalMappingContext context) {
 		this(property, owner, simpleTypeHolder, context.getNamingStrategy());
