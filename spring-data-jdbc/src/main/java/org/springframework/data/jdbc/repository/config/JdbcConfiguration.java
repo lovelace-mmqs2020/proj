@@ -48,10 +48,8 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
  * @author Mark Paluch
  * @author Michael Simons
  * @author Christoph Strobl
- * @deprecated Use {@link AbstractJdbcConfiguration} instead.
  */
 @Configuration
-@Deprecated
 public class JdbcConfiguration {
 
 	/**
