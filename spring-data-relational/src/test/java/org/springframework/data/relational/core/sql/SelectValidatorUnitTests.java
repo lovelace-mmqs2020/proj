@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 package org.springframework.data.relational.core.sql;
-
+import org.springframework.data.relational.core.sql.SelectBuilder.SelectFromAndOrderBy;
+import org.springframework.data.relational.core.sql.SelectBuilder.SelectFromAndJoin;
+import org.springframework.data.relational.core.sql.SelectBuilder.SelectWhereAndOr;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.Test;
@@ -30,9 +32,9 @@ public class SelectValidatorUnitTests {
 	public void shouldReportMissingTableViaSelectlist() {
 
 		Column column = SQL.table("table").column("foo");
-
+			SelectFromAndJoin statement = StatementBuilder.select(column).from(SQL.table("bar"));
 		assertThatThrownBy(() -> {
-			StatementBuilder.select(column).from(SQL.table("bar")).build();
+			statement.build();
 		}).isInstanceOf(IllegalStateException.class)
 				.hasMessageContaining("Required table [table] by a SELECT column not imported by FROM [bar] or JOIN []");
 	}
@@ -41,9 +43,9 @@ public class SelectValidatorUnitTests {
 	public void shouldReportMissingTableViaSelectlistCount() {
 
 		Column column = SQL.table("table").column("foo");
-
+		SelectFromAndJoin statement = StatementBuilder.select(Functions.count(column)).from(SQL.table("bar"));
 		assertThatThrownBy(() -> {
-			StatementBuilder.select(Functions.count(column)).from(SQL.table("bar")).build();
+			statement.build();
 		}).isInstanceOf(IllegalStateException.class)
 				.hasMessageContaining("Required table [table] by a SELECT column not imported by FROM [bar] or JOIN []");
 	}
@@ -52,9 +54,9 @@ public class SelectValidatorUnitTests {
 	public void shouldReportMissingTableViaSelectlistDistinct() {
 
 		Column column = SQL.table("table").column("foo");
-
+		SelectFromAndJoin statement = StatementBuilder.select(column).distinct().from(SQL.table("bar"));
 		assertThatThrownBy(() -> {
-			StatementBuilder.select(column).distinct().from(SQL.table("bar")).build();
+			statement.build();
 		}).isInstanceOf(IllegalStateException.class)
 				.hasMessageContaining("Required table [table] by a SELECT column not imported by FROM [bar] or JOIN []");
 	}
@@ -64,12 +66,11 @@ public class SelectValidatorUnitTests {
 
 		Column foo = SQL.table("table").column("foo");
 		Table bar = SQL.table("bar");
-
-		assertThatThrownBy(() -> {
-			StatementBuilder.select(bar.column("foo")) //
+		SelectFromAndOrderBy statement = StatementBuilder.select(bar.column("foo")) //
 					.from(bar) //
-					.orderBy(foo) //
-					.build();
+					.orderBy(foo);
+		assertThatThrownBy(() -> {
+			statement.build();
 		}).isInstanceOf(IllegalStateException.class)
 				.hasMessageContaining("Required table [table] by a ORDER BY column not imported by FROM [bar] or JOIN []");
 	}
@@ -79,12 +80,11 @@ public class SelectValidatorUnitTests {
 
 		Column column = SQL.table("table").column("foo");
 		Table bar = SQL.table("bar");
-
-		assertThatThrownBy(() -> {
-			StatementBuilder.select(bar.column("foo")) //
+		SelectWhereAndOr statement = StatementBuilder.select(bar.column("foo")) //
 					.from(bar) //
-					.where(new SimpleCondition(column, "=", "foo")) //
-					.build();
+					.where(new SimpleCondition(column, "=", "foo"));
+		assertThatThrownBy(() -> {
+			statement.build();
 		}).isInstanceOf(IllegalStateException.class)
 				.hasMessageContaining("Required table [table] by a WHERE predicate not imported by FROM [bar] or JOIN []");
 	}
@@ -99,9 +99,10 @@ public class SelectValidatorUnitTests {
 		Column bah = floo.column("bah");
 
 		Select subselect = Select.builder().select(bah).from(floo).build();
-
+		//SelectBuilder
+		SelectWhereAndOr statement = Select.builder().select(bah).from(foo).where(Conditions.in(bar, subselect));
 		assertThatThrownBy(() -> {
-			Select.builder().select(bah).from(foo).where(Conditions.in(bar, subselect)).build();
+			statement.build();
 		}).isInstanceOf(IllegalStateException.class)
 				.hasMessageContaining("Required table [floo] by a SELECT column not imported by FROM [foo] or JOIN []");
 	}
