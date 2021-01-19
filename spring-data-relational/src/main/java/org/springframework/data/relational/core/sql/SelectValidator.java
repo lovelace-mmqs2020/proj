@@ -103,7 +103,10 @@ class SelectValidator extends AbstractImportValidator {
 			Table table = ((AsteriskFromTable) segment).getTable();
 			requiredBySelect.add(table);
 		}
+		enterBis(segment);
+	}
 
+	public void enterBis(Visitable segment) {
 		if (segment instanceof Column && (parent instanceof Select || parent instanceof SimpleFunction)) {
 
 			Table table = ((Column) segment).getTable();
