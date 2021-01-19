@@ -42,9 +42,8 @@ public interface RelationalPersistentProperty extends PersistentProperty<Relatio
 
 	/**
 	 * @return
-	 * @deprecated Use {@link #getReverseColumnName(PersistentPropertyPathExtension)} instead.
 	 */
-	@Deprecated
+	
 	SqlIdentifier getReverseColumnName();
 
 	default SqlIdentifier getReverseColumnName(PersistentPropertyPathExtension path) {
