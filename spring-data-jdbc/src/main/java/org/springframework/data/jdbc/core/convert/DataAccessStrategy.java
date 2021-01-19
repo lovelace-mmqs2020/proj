@@ -202,9 +202,7 @@ public interface DataAccessStrategy extends RelationResolver {
 	 *
 	 * @param rootId Id of the root object on which the {@literal propertyPath} is based.
 	 * @param property Leading from the root object to the entities to be found.
-	 * @deprecated Use #findAllByPath instead.
 	 */
-	@Deprecated
 	<T> Iterable<T> findAllByProperty(Object rootId, RelationalPersistentProperty property);
 
 	/**
