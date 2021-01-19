@@ -42,10 +42,8 @@ public class RelationalEventWithId extends SimpleRelationalEvent implements With
 	/**
 	 * Events with an identifier will always return a {@link Specified} one.
 	 *
-	 * @deprecated since 1.1, obtain the id from the entity instead.
 	 */
 	@Override
-	@Deprecated
 	public Specified getId() {
 		return id;
 	}
