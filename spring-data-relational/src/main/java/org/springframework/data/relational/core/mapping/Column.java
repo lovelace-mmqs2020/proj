@@ -41,8 +41,7 @@ public @interface Column {
 	/**
 	 * The column name for key columns of List or Map collections.
 	 *
-	 * @deprecated since 1.1, was used for collection mapping. Use {@link MappedCollection} instead of this.
 	 */
-	@Deprecated
+	
 	String keyColumn() default "";
 }
