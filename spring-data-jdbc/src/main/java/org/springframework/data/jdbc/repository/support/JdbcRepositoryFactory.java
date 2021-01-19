@@ -94,9 +94,8 @@ public class JdbcRepositoryFactory extends RepositoryFactorySupport {
 
 	/**
 	 * @param rowMapperMap must not be {@literal null} consider {@link RowMapperMap#EMPTY} instead.
-	 * @deprecated use {@link #setQueryMappingConfiguration(QueryMappingConfiguration)} instead
 	 */
-	@Deprecated
+	
 	public void setRowMapperMap(RowMapperMap rowMapperMap) {
 		setQueryMappingConfiguration(rowMapperMap);
 	}
