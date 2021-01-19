@@ -35,7 +35,7 @@ import org.springframework.dao.DataAccessException;
  *
  * @author Jens Schauder
  */
-class FunctionCollector<T> implements Collector<DataAccessStrategy, FunctionCollector.ResultOrException<T>, T> {
+class FunctionCollector<T> implements Collector<DataAccessStrategy, FunctionCollector.ResultOrDExceptio<T>, T> {
 
 	private final Function<DataAccessStrategy, T> method;
 
@@ -48,8 +48,8 @@ class FunctionCollector<T> implements Collector<DataAccessStrategy, FunctionColl
 	 * @see java.util.stream.Collector#supplier()
 	 */
 	@Override
-	public Supplier<ResultOrException<T>> supplier() {
-		return ResultOrException::new;
+	public Supplier<ResultOrDExceptio<T>> supplier() {
+		return ResultOrDExceptio::new;
 	}
 
 	/*
@@ -57,7 +57,7 @@ class FunctionCollector<T> implements Collector<DataAccessStrategy, FunctionColl
 	 * @see java.util.stream.Collector#accumulator()
 	 */
 	@Override
-	public BiConsumer<ResultOrException<T>, DataAccessStrategy> accumulator() {
+	public BiConsumer<ResultOrDExceptio<T>, DataAccessStrategy> accumulator() {
 
 		return (roe, das) -> {
 
@@ -77,7 +77,7 @@ class FunctionCollector<T> implements Collector<DataAccessStrategy, FunctionColl
 	 * @see java.util.stream.Collector#combiner()
 	 */
 	@Override
-	public BinaryOperator<ResultOrException<T>> combiner() {
+	public BinaryOperator<ResultOrDExceptio<T>> combiner() {
 
 		return (roe1, roe2) -> {
 			throw new UnsupportedOperationException("Can't combine method calls");
@@ -89,7 +89,7 @@ class FunctionCollector<T> implements Collector<DataAccessStrategy, FunctionColl
 	 * @see java.util.stream.Collector#finisher()
 	 */
 	@Override
-	public Function<ResultOrException<T>, T> finisher() {
+	public Function<ResultOrDExceptio<T>, T> finisher() {
 
 		return roe -> {
 
@@ -114,7 +114,7 @@ class FunctionCollector<T> implements Collector<DataAccessStrategy, FunctionColl
 	 * Stores intermediate results. I.e. a list of exceptions caught so far, any actual result and the fact, if there
 	 * actually is an result.
 	 */
-	static class ResultOrException<T> {
+	static class ResultOrDExceptio<T> {
 
 		private T result;
 		private final List<Exception> exceptions = new LinkedList<>();
