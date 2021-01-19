@@ -33,6 +33,9 @@ import org.springframework.util.Assert;
  */
 public abstract class Conditions {
 
+	private final static String ERROR_MESSAGE = "Comparison column or expression must not be null";
+	private final static String ERROR_MESSAGE_EX =  "Expression argument must not be null";
+
 	/**
 	 * Creates a plain {@code sql} {@link Condition}.
 	 *
@@ -153,8 +156,8 @@ public abstract class Conditions {
 	 */
 	public static In in(Expression columnOrExpression, Expression arg) {
 
-		Assert.notNull(columnOrExpression, "Comparison column or expression must not be null");
-		Assert.notNull(arg, "Expression argument must not be null");
+		Assert.notNull(columnOrExpression, ERROR_MESSAGE);
+		Assert.notNull(arg, ERROR_MESSAGE_EX);
 
 		return In.create(columnOrExpression, arg);
 	}
@@ -168,8 +171,8 @@ public abstract class Conditions {
 	 */
 	public static Condition in(Expression columnOrExpression, Collection<? extends Expression> expressions) {
 
-		Assert.notNull(columnOrExpression, "Comparison column or expression must not be null");
-		Assert.notNull(expressions, "Expression argument must not be null");
+		Assert.notNull(columnOrExpression, ERROR_MESSAGE);
+		Assert.notNull(expressions, ERROR_MESSAGE_EX);
 
 		return In.create(columnOrExpression, new ArrayList<>(expressions));
 	}
@@ -183,8 +186,8 @@ public abstract class Conditions {
 	 */
 	public static In in(Expression columnOrExpression, Expression... expressions) {
 
-		Assert.notNull(columnOrExpression, "Comparison column or expression must not be null");
-		Assert.notNull(expressions, "Expression argument must not be null");
+		Assert.notNull(columnOrExpression, ERROR_MESSAGE);
+		Assert.notNull(expressions, ERROR_MESSAGE_EX);
 
 		return In.create(columnOrExpression, Arrays.asList(expressions));
 	}
@@ -213,8 +216,8 @@ public abstract class Conditions {
 	 */
 	public static In notIn(Expression columnOrExpression, Expression arg) {
 
-		Assert.notNull(columnOrExpression, "Comparison column or expression must not be null");
-		Assert.notNull(arg, "Expression argument must not be null");
+		Assert.notNull(columnOrExpression, ERROR_MESSAGE);
+		Assert.notNull(arg, ERROR_MESSAGE_EX);
 
 		return In.create(columnOrExpression, arg);
 	}
@@ -228,8 +231,8 @@ public abstract class Conditions {
 	 */
 	public static Condition notIn(Expression columnOrExpression, Collection<? extends Expression> expressions) {
 
-		Assert.notNull(columnOrExpression, "Comparison column or expression must not be null");
-		Assert.notNull(expressions, "Expression argument must not be null");
+		Assert.notNull(columnOrExpression, ERROR_MESSAGE);
+		Assert.notNull(expressions, ERROR_MESSAGE_EX);
 
 		return In.createNotIn(columnOrExpression, new ArrayList<>(expressions));
 	}
@@ -243,8 +246,8 @@ public abstract class Conditions {
 	 */
 	public static In notIn(Expression columnOrExpression, Expression... expressions) {
 
-		Assert.notNull(columnOrExpression, "Comparison column or expression must not be null");
-		Assert.notNull(expressions, "Expression argument must not be null");
+		Assert.notNull(columnOrExpression, ERROR_MESSAGE);
+		Assert.notNull(expressions, ERROR_MESSAGE_EX);
 
 		return In.createNotIn(columnOrExpression, Arrays.asList(expressions));
 	}
