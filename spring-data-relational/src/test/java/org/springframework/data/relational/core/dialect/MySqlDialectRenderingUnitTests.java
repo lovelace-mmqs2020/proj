@@ -40,7 +40,7 @@ public class MySqlDialectRenderingUnitTests {
 	public void before() {
 		factory.setNamingStrategy(NamingStrategies.asIs());
 	}
-    @Ignore
+
 	@Test // DATAJDBC-278
 	public void shouldRenderSelectWithLimit() {
 
@@ -51,7 +51,7 @@ public class MySqlDialectRenderingUnitTests {
 
 		assertThat(sql).isEqualTo("SELECT foo.* FROM foo LIMIT 10");
 	}
-    @Ignore
+    
 	@Test // DATAJDBC-278
 	public void shouldRenderSelectWithOffset() {
 
@@ -62,7 +62,7 @@ public class MySqlDialectRenderingUnitTests {
 
 		assertThat(sql).isEqualTo("SELECT foo.* FROM foo LIMIT 10, 18446744073709551615");
 	}
-    @Ignore
+    
 	@Test // DATAJDBC-278
 	public void shouldRenderSelectWithLimitOffset() {
 
