@@ -27,9 +27,8 @@ import org.springframework.util.Assert;
  * A {@link RowMapperMap} that allows for registration of {@link RowMapper}s via a fluent Api.
  *
  * @author Jens Schauder
- * @deprecated Since 1.1 use {@link DefaultQueryMappingConfiguration} instead.
  */
-@Deprecated
+
 public class ConfigurableRowMapperMap implements RowMapperMap {
 
 	private Map<Class<?>, RowMapper<?>> rowMappers = new LinkedHashMap<>();
