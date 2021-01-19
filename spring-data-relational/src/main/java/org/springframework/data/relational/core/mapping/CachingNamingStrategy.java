@@ -66,7 +66,6 @@ class CachingNamingStrategy implements NamingStrategy {
 	 * @see org.springframework.data.relational.core.mapping.NamingStrategy#getQualifiedTableName(java.lang.Class)
 	 */
 	@Override
-	@Deprecated
 	public String getQualifiedTableName(Class<?> type) {
 		return qualifiedTableNames.computeIfAbsent(type, delegate::getQualifiedTableName);
 	}
