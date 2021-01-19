@@ -44,10 +44,8 @@ class SimpleRelationalEvent extends ApplicationEvent implements RelationalEvent 
 	}
 
 	/**
-	 * @deprecated since 1.1, obtain the id from the entity instead.
 	 */
 	@Override
-	@Deprecated
 	public Identifier getId() {
 		return (Identifier) getSource();
 	}
@@ -66,10 +64,8 @@ class SimpleRelationalEvent extends ApplicationEvent implements RelationalEvent 
 	 * triggered this event.
 	 *
 	 * @return Guaranteed to be not {@literal null}.
-	 * @deprecated There is currently no replacement for this. If something like this is required please create an issue
-	 *             outlining your use case.
 	 */
-	@Deprecated
+	
 	public AggregateChange getChange() {
 		return change;
 	}
