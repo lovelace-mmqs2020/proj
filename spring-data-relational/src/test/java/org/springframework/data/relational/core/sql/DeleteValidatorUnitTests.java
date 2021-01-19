@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 package org.springframework.data.relational.core.sql;
+import org.springframework.data.relational.core.sql.DeleteBuilder.DeleteWhereAndOr;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -31,12 +32,11 @@ public class DeleteValidatorUnitTests {
 
 		Column column = SQL.table("table").column("foo");
 		Table bar = SQL.table("bar");
-
-		assertThatThrownBy(() -> {
-			StatementBuilder.delete() //
+		DeleteWhereAndOr statement = StatementBuilder.delete() //
 					.from(bar) //
-					.where(new SimpleCondition(column, "=", "foo")) //
-					.build();
+					.where(new SimpleCondition(column, "=", "foo"));
+		assertThatThrownBy(() -> {
+			statement.build();
 		}).isInstanceOf(IllegalStateException.class)
 				.hasMessageContaining("Required table [table] by a WHERE predicate not imported by FROM [bar]");
 	}
