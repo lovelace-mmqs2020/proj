@@ -22,9 +22,8 @@ import org.springframework.lang.Nullable;
  * A map from a type to a {@link RowMapper} to be used for extracting that type from {@link java.sql.ResultSet}s.
  *
  * @author Jens Schauder
- * @deprecated since 1.1 use {@link QueryMappingConfiguration}
  */
-@Deprecated
+
 public interface RowMapperMap extends QueryMappingConfiguration {
 
 	/**
