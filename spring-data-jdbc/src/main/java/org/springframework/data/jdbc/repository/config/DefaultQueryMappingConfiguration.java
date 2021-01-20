@@ -20,7 +20,7 @@ import org.springframework.util.Assert;
 public class DefaultQueryMappingConfiguration implements QueryMappingConfiguration {
 
 	private Map<Class<?>, RowMapper<?>> mappers = new LinkedHashMap<>();
-
+    @Override
 	@Nullable
 	public <T> RowMapper<? extends T> getRowMapper(Class<T> type) {
 
