@@ -164,7 +164,7 @@ class AggregateChangeExecutor {
 
 		// set values of changed immutables referenced by this entity
 		cascadingValues.forEachPath(action, (persistentPropertyPath, o) -> propertyAccessor
-				.setProperty(getRelativePath(action, persistentPropertyPath), o));
+				.setProperty(getRelativePath(action, persistentPropertyPath), o)); //NOSONAR
 
 		return propertyAccessor.getBean();
 	}
@@ -189,10 +189,10 @@ class AggregateChangeExecutor {
 	 */
 	private static class StagedValues {
 
-		static final List<MultiValueAggregator> aggregators = Arrays.asList(SetAggregator.INSTANCE, MapAggregator.INSTANCE,
+		static final List<MultiValueAggregator> aggregators = Arrays.asList(SetAggregator.INSTANCE, MapAggregator.INSTANCE, //NOSONAR
 				ListAggregator.INSTANCE, SingleElementAggregator.INSTANCE);
 
-		Map<DbAction, Map<PersistentPropertyPath, Object>> values = new HashMap<>();
+		Map<DbAction, Map<PersistentPropertyPath, Object>> values = new HashMap<>(); //NOSONAR
 
 		/**
 		 * Adds a value that needs to be set in an entity higher up in the tree of entities in the aggregate. If the
@@ -206,11 +206,11 @@ class AggregateChangeExecutor {
 		 * @param value The value to be set. Must not be {@literal null}.
 		 */
 		@SuppressWarnings("unchecked")
-		<T> void stage(DbAction<?> action, PersistentPropertyPath path, @Nullable Object qualifier, Object value) {
+		<T> void stage(DbAction<?> action, PersistentPropertyPath path, @Nullable Object qualifier, Object value) {  //NOSONAR
 
 			MultiValueAggregator<T> aggregator = getAggregatorFor(path);
 
-			Map<PersistentPropertyPath, Object> valuesForPath = this.values.computeIfAbsent(action,
+			Map<PersistentPropertyPath, Object> valuesForPath = this.values.computeIfAbsent(action,  //NOSONAR
 					dbAction -> new HashMap<>());
 
 			T currentValue = (T) valuesForPath.computeIfAbsent(path,
@@ -221,10 +221,10 @@ class AggregateChangeExecutor {
 			valuesForPath.put(path, newValue);
 		}
 
-		private MultiValueAggregator getAggregatorFor(PersistentPropertyPath path) {
+		private MultiValueAggregator getAggregatorFor(PersistentPropertyPath path) { //NOSONAR
 
-			PersistentProperty property = path.getRequiredLeafProperty();
-			for (MultiValueAggregator aggregator : aggregators) {
+			PersistentProperty property = path.getRequiredLeafProperty(); //NOSONAR
+			for (MultiValueAggregator aggregator : aggregators) {  //NOSONAR
 				if (aggregator.handles(property)) {
 					return aggregator;
 				}
@@ -239,7 +239,7 @@ class AggregateChangeExecutor {
 		 * action} is called with each applicable {@link PersistentPropertyPath} and {@code value} that is assignable to the
 		 * property.
 		 */
-		void forEachPath(DbAction<?> dbAction, BiConsumer<PersistentPropertyPath, Object> action) {
+		void forEachPath(DbAction<?> dbAction, BiConsumer<PersistentPropertyPath, Object> action) {  //NOSONAR
 			values.getOrDefault(dbAction, Collections.emptyMap()).forEach(action);
 		}
 	}
@@ -250,7 +250,7 @@ class AggregateChangeExecutor {
 			return Object.class;
 		}
 
-		default boolean handles(PersistentProperty property) {
+		default boolean handles(PersistentProperty property) {  //NOSONAR
 			return handledType().isAssignableFrom(property.getType());
 		}
 
@@ -261,7 +261,7 @@ class AggregateChangeExecutor {
 
 	}
 
-	private enum SetAggregator implements MultiValueAggregator<Set> {
+	private enum SetAggregator implements MultiValueAggregator<Set> {  //NOSONAR
 
 		INSTANCE;
 
@@ -272,7 +272,7 @@ class AggregateChangeExecutor {
 
 		@Override
 		public Set createEmptyInstance() {
-			return new HashSet();
+			return new HashSet(); //NOSONAR
 		}
 
 		@SuppressWarnings("unchecked")
@@ -286,7 +286,7 @@ class AggregateChangeExecutor {
 		}
 	}
 
-	private enum ListAggregator implements MultiValueAggregator<List> {
+	private enum ListAggregator implements MultiValueAggregator<List> { //NOSONAR
 
 		INSTANCE;
 
@@ -297,7 +297,7 @@ class AggregateChangeExecutor {
 
 		@Override
 		public List createEmptyInstance() {
-			return new ArrayList();
+			return new ArrayList(); //NOSONAR
 		}
 
 		@SuppressWarnings("unchecked")
@@ -317,7 +317,7 @@ class AggregateChangeExecutor {
 		}
 	}
 
-	private enum MapAggregator implements MultiValueAggregator<Map> {
+	private enum MapAggregator implements MultiValueAggregator<Map> { //NOSONAR
 
 		INSTANCE;
 
@@ -328,7 +328,7 @@ class AggregateChangeExecutor {
 
 		@Override
 		public Map createEmptyInstance() {
-			return new HashMap();
+			return new HashMap(); //NOSONAR
 		}
 
 		@SuppressWarnings("unchecked")
@@ -353,7 +353,7 @@ class AggregateChangeExecutor {
 		}
 
 		@Override
-		public Object add(@Nullable Object __null, @Nullable Object qualifier, Object value) {
+		public Object add(@Nullable Object __null, @Nullable Object qualifier, Object value) { //NOSONAR
 			return value;
 		}
 	}
