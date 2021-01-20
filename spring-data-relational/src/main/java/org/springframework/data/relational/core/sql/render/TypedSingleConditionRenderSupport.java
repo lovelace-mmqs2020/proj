@@ -79,8 +79,8 @@ abstract class TypedSingleConditionRenderSupport<T extends Visitable & Condition
 
 		Assert.state(hasDelegatedRendering(), "Rendering not delegated. Cannot consume delegated rendering part.");
 
-		PartRenderer current = this.current;
+		PartRenderer currentd = this.current;
 		this.current = null;
-		return current.getRenderedPart();
+		return currentd.getRenderedPart();
 	}
 }
