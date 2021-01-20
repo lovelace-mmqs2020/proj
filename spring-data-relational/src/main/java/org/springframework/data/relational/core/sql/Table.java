@@ -177,8 +177,8 @@ public class Table extends AbstractSegment {
 		Assert.notNull(names, CONSTANT);
 
 		List<Column> columns = new ArrayList<>();
-		for (SqlIdentifier name : names) {
-			columns.add(column(name));
+		for (SqlIdentifier nameX : names) {
+			columns.add(column(nameX));
 		}
 
 		return columns;
@@ -233,7 +233,8 @@ public class Table extends AbstractSegment {
 	 *         {@link Aliased#getAlias() alias}.
 	 */
 	public SqlIdentifier getReferenceName() {
-		return name;
+		SqlIdentifier result = this.getName();
+		return result;
 	}
 
 	/*
