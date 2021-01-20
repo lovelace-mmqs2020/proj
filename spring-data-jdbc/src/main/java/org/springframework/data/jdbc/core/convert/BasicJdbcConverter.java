@@ -238,9 +238,14 @@ public class BasicJdbcConverter extends BasicRelationalConverter implements Jdbc
 		}  else {
 			throw new NullPointerException(errore);
 		}
-
-		return AggregateReference.to(readValue(value, idType));
+		Object val = readValue(value, idType);
+		if (val == null) {
+			throw new NullPointerException("Value is null");
+		} else {
+			return AggregateReference.to(val);
+		}
 	}
+
 
 	/*
 	 * (non-Javadoc)
@@ -355,11 +360,11 @@ public class BasicJdbcConverter extends BasicRelationalConverter implements Jdbc
 		private ReadingContext(PersistentPropertyPathExtension rootPath, ResultSet resultSet, Identifier identifier,
 				Object key) {
 
-			RelationalPersistentEntity<T> entity = (RelationalPersistentEntity<T>) rootPath.getLeafEntity();
+			RelationalPersistentEntity<T> newEntity = (RelationalPersistentEntity<T>) rootPath.getLeafEntity();
 
-			Assert.notNull(entity, "The rootPath must point to an entity.");
+			Assert.notNull(newEntity, "The rootPath must point to an entity.");
 
-			this.entity = entity;
+			this.entity = newEntity;
 			this.resultSet = resultSet;
 			this.rootPath = rootPath;
 			this.path = new PersistentPropertyPathExtension(
@@ -434,14 +439,14 @@ public class BasicJdbcConverter extends BasicRelationalConverter implements Jdbc
 
 		private Iterable<Object> resolveRelation(@Nullable Object id, RelationalPersistentProperty property) {
 
-			Identifier identifier = id == null //
+			Identifier newIdentifier = id == null //
 					? this.identifier.withPart(rootPath.getQualifierColumn(), key, Object.class) //
 					: Identifier.of(rootPath.extendBy(property).getReverseColumnName(), id, Object.class);
 
 			PersistentPropertyPath<RelationalPersistentProperty> propertyPath = path.extendBy(property)
 					.getRequiredPersistentPropertyPath();
 
-			return relationResolver.findAllByPath(identifier, propertyPath);
+			return relationResolver.findAllByPath(newIdentifier, propertyPath);
 		}
 
 		/**
@@ -478,7 +483,7 @@ public class BasicJdbcConverter extends BasicRelationalConverter implements Jdbc
 		private boolean shouldCreateEmptyEmbeddedInstance(RelationalPersistentProperty property) {
 			Embedded a;
 			if (property != null) {
-				
+
 					a = property.findAnnotation(Embedded.class);
 				if(a != null) {
 					return OnEmpty.USE_EMPTY.equals(a.onEmpty());
@@ -513,8 +518,8 @@ public class BasicJdbcConverter extends BasicRelationalConverter implements Jdbc
 		private Object readEntityFrom(RelationalPersistentProperty property, PersistentPropertyPathExtension path) {
 
 			ReadingContext<?> newContext = extendBy(property);
-			RelationalPersistentEntity<?> entity = getMappingContext().getRequiredPersistentEntity(property.getActualType());
-			RelationalPersistentProperty idProperty = entity.getIdProperty();
+			RelationalPersistentEntity<?> newEntity = getMappingContext().getRequiredPersistentEntity(property.getActualType());
+			RelationalPersistentProperty idProperty = newEntity.getIdProperty();
 
 			Object idValue;
 
