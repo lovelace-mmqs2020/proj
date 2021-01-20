@@ -55,7 +55,8 @@ class NestedConditionVisitor extends TypedSubtreeVisitor<NestedCondition> {
 	private DelegatingVisitor getDelegation(Visitable segment) {
 
 		if (segment instanceof Condition) {
-			return conditionVisitor = new ConditionVisitor(context);
+			conditionVisitor = new ConditionVisitor(context);
+			return conditionVisitor;
 		}
 
 		return null;
