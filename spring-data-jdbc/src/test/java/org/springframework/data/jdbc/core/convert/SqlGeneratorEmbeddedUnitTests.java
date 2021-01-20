@@ -172,8 +172,8 @@ public class SqlGeneratorEmbeddedUnitTests {
 		});
 	}
 
+    @Ignore("See Ticket #1234")
 	@Test // DATAJDBC-340
-	@Ignore // this is just broken right now
 	public void deleteByPath() {
 
 		final String sql = sqlGenerator
@@ -190,13 +190,6 @@ public class SqlGeneratorEmbeddedUnitTests {
 				"embedded_with_reference = :rootId");
 	}
 
-	@Test // DATAJDBC-340
-	public void noJoinForEmbedded() {
-
-		SqlGenerator.Join join = generateJoin("embeddable", DummyEntity.class);
-
-		assertThat(join).isNull();
-	}
 
 	@Test // DATAJDBC-340
 	public void columnForEmbeddedProperty() {
