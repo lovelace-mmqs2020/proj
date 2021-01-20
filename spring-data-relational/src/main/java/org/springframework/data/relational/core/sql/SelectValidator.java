@@ -17,7 +17,8 @@ package org.springframework.data.relational.core.sql;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Stack;
+import java.util.Deque;
+import java.util.ArrayDeque;
 
 /**
  * Validator for {@link Select} statements.
@@ -31,7 +32,7 @@ import java.util.Stack;
  */
 class SelectValidator extends AbstractImportValidator {
 
-	private final Stack<Select> selects = new Stack<>();
+	private final Deque<Select> selects = new ArrayDeque<>();
 
 	private int selectFieldCount;
 	private Set<Table> requiredBySelect = new HashSet<>();
