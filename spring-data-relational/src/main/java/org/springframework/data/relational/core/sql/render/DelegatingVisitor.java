@@ -99,6 +99,7 @@ abstract class DelegatingVisitor implements Visitor {
 	 * (non-Javadoc)
 	 * @see org.springframework.data.relational.core.sql.Visitor#leave(org.springframework.data.relational.core.sql.Visitable)
 	 */
+	@Override
 	public final void leave(Visitable segment) {
 		doLeave0(segment);
 	}
