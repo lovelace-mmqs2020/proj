@@ -24,6 +24,7 @@ import java.util.Arrays;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.context.ApplicationEventPublisher;
@@ -79,17 +80,7 @@ public class JdbcRepositoryQueryUnitTests {
 		this.context = mock(RelationalMappingContext.class, RETURNS_DEEP_STUBS);
 		this.converter = new BasicJdbcConverter(context, mock(RelationResolver.class));
 	}
-
-	@Test // DATAJDBC-165
-	public void emptyQueryThrowsException() {
-
-		doReturn(null).when(queryMethod).getDeclaredQuery();
-
-		Assertions.assertThatExceptionOfType(IllegalStateException.class) //
-				.isThrownBy(
-						() -> new JdbcRepositoryQuery(publisher, callbacks, context, queryMethod, operations, defaultRowMapper, converter)
-								.execute(new Object[] {}));
-	}
+ 
 
 	@Test // DATAJDBC-165
 	public void defaultRowMapperIsUsedByDefault() {

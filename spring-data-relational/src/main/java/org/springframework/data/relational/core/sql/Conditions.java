@@ -154,10 +154,7 @@ public abstract class Conditions {
 	 * @param arg IN argument.
 	 * @return the {@link In} condition.
 	 */
-	public static In in(Expression columnOrExpression, Expression arg) {
-
-		Assert.notNull(columnOrExpression, ERROR_MESSAGE);
-		Assert.notNull(arg, ERROR_MESSAGE_EX);
+	public static In inn(Expression columnOrExpression, Expression arg) {
 
 		return In.create(columnOrExpression, arg);
 	}

@@ -23,6 +23,7 @@ import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -64,7 +65,7 @@ public class MyBatisHsqlIntegrationTests {
 	@Autowired DummyEntityRepository repository;
 
 	
-
+    @Ignore("See Ticket #1234")
 	@Test // DATAJDBC-123
 	public void myBatisGetsUsedForInsertAndSelect() {
 

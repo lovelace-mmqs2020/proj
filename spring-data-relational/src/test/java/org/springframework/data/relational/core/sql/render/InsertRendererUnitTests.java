@@ -50,7 +50,7 @@ public class InsertRendererUnitTests {
 
 		assertThat(SqlRenderer.toString(insert)).isEqualTo("INSERT INTO bar (foo) VALUES (?)");
 	}
-    @Ignore
+    @Ignore("See Ticket #1235")
 	@Test // DATAJDBC-335
 	public void shouldRenderInsertMultipleColumns() {
 

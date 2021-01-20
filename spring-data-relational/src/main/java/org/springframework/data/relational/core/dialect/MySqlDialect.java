@@ -64,7 +64,7 @@ public class MySqlDialect extends AbstractDialect {
 		@Override
 		public String getLimitOffset(long limit, long offset) {
 
-			// LIMIT {[offset,] row_count}
+			
 			return String.format("LIMIT %s, %s", offset, limit);
 		}
 

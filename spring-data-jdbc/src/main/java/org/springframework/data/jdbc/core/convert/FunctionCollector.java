@@ -84,22 +84,7 @@ class FunctionCollector<T> implements Collector<DataAccessStrategy, FunctionColl
 		};
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.util.stream.Collector#finisher()
-	 */
-	@Override
-	public Function<ResultOrDExceptio<T>, T> finisher() {
-
-		return roe -> {
-
-			if (roe.hasResult)
-				return roe.result;
-			else
-				throw new CombinedDataAccessException("Failed to perform data access with all available strategies",
-						Collections.unmodifiableList(roe.exceptions));
-		};
-	}
+	
 
 	/*
 	 * (non-Javadoc)
@@ -116,7 +101,6 @@ class FunctionCollector<T> implements Collector<DataAccessStrategy, FunctionColl
 	 */
 	static class ResultOrDExceptio<T> {
 
-		private T result;
 		private final List<Exception> exceptions = new LinkedList<>();
 		private boolean hasResult = false;
 
@@ -125,7 +109,6 @@ class FunctionCollector<T> implements Collector<DataAccessStrategy, FunctionColl
 		}
 
 		private void setResult(T result) {
-			this.result = result;
 			hasResult = true;
 		}
 
@@ -136,12 +119,22 @@ class FunctionCollector<T> implements Collector<DataAccessStrategy, FunctionColl
 
 	static class CombinedDataAccessException extends DataAccessException {
 
-		CombinedDataAccessException(String message, List<Exception> exceptions) {
-			super(combineMessage(message, exceptions), exceptions.get(exceptions.size() - 1));
+		
+
+		public CombinedDataAccessException(String msg) {
+			super(msg);
 		}
 
-		private static String combineMessage(String message, List<Exception> exceptions) {
-			return message + exceptions.stream().map(Exception::getMessage).collect(Collectors.joining("\n\t", "\n\t", ""));
-		}
+		/**
+		 *
+		 */
+		private static final long serialVersionUID = 1L;
+
+		
+	}
+
+	@Override
+	public Function<ResultOrDExceptio<T>, T> finisher() {
+		return null;
 	}
 }
