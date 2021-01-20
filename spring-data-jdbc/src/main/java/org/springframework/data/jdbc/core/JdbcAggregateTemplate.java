@@ -80,8 +80,8 @@ public class JdbcAggregateTemplate implements JdbcAggregateOperations {
 	 * @param dataAccessStrategy must not be {@literal null}.
 	 * @since 1.1
 	 */
-	public JdbcAggregateTemplate(ApplicationContext publisher, RelationalMappingContext context, JdbcConverter converter,
-			DataAccessStrategy dataAccessStrategy) {
+	public JdbcAggregateTemplate(ApplicationContext publisher, RelationalMappingContext context,
+			JdbcConverter converter, DataAccessStrategy dataAccessStrategy) {
 
 		Assert.notNull(publisher, "ApplicationContext must not be null!");
 		Assert.notNull(context, "RelationalMappingContext must not be null!");
@@ -96,7 +96,6 @@ public class JdbcAggregateTemplate implements JdbcAggregateOperations {
 		this.jdbcEntityUpdateWriter = new RelationalEntityUpdateWriter(context);
 		this.jdbcEntityDeleteWriter = new RelationalEntityDeleteWriter(context);
 		this.interpreter = new DefaultJdbcInterpreter(converter, context, accessStrategy);
-
 		this.executor = new AggregateChangeExecutor(interpreter, converter);
 
 		setEntityCallbacks(EntityCallbacks.create(publisher));
@@ -110,23 +109,23 @@ public class JdbcAggregateTemplate implements JdbcAggregateOperations {
 	 * @param context must not be {@literal null}.
 	 * @param dataAccessStrategy must not be {@literal null}.
 	 */
-	public JdbcAggregateTemplate(ApplicationEventPublisher publisher, RelationalMappingContext context,
-			JdbcConverter converter, DataAccessStrategy dataAccessStrategy) {
+	public JdbcAggregateTemplate(ApplicationEventPublisher eventPublisher, RelationalMappingContext mappingContext,
+			JdbcConverter jdbcConverter, DataAccessStrategy dataAccessStrategy) {
 
-		Assert.notNull(publisher, "ApplicationEventPublisher must not be null!");
-		Assert.notNull(context, "RelationalMappingContext must not be null!");
-		Assert.notNull(converter, "RelationalConverter must not be null!");
+		Assert.notNull(eventPublisher, "ApplicationEventPublisher must not be null!");
+		Assert.notNull(mappingContext, "RelationalMappingContext must not be null!");
+		Assert.notNull(jdbcConverter, "RelationalConverter must not be null!");
 		Assert.notNull(dataAccessStrategy, "DataAccessStrategy must not be null!");
 
-		this.publisher = publisher;
-		this.context = context;
+		this.publisher = eventPublisher;
+		this.context = mappingContext;
 		this.accessStrategy = dataAccessStrategy;
 
-		this.jdbcEntityInsertWriter = new RelationalEntityInsertWriter(context);
-		this.jdbcEntityUpdateWriter = new RelationalEntityUpdateWriter(context);
-		this.jdbcEntityDeleteWriter = new RelationalEntityDeleteWriter(context);
-		this.interpreter = new DefaultJdbcInterpreter(converter, context, accessStrategy);
-		this.executor = new AggregateChangeExecutor(interpreter, converter);
+		this.jdbcEntityInsertWriter = new RelationalEntityInsertWriter(mappingContext);
+		this.jdbcEntityUpdateWriter = new RelationalEntityUpdateWriter(mappingContext);
+		this.jdbcEntityDeleteWriter = new RelationalEntityDeleteWriter(mappingContext);
+		this.interpreter = new DefaultJdbcInterpreter(jdbcConverter, mappingContext, accessStrategy);
+		this.executor = new AggregateChangeExecutor(interpreter, jdbcConverter);
 	}
 
 	/**
