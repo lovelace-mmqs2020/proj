@@ -39,7 +39,8 @@ class DefaultSelect implements Select {
 	private final List<Join> joins;
 	private final @Nullable Where where;
 	private final List<OrderByField> orderBy;
-
+	
+    @SuppressWarnings({"squid:S107"})
 	DefaultSelect(boolean distinct, List<Expression> selectList, List<Table> from, long limit, long offset,
 			List<Join> joins, @Nullable Condition where, List<OrderByField> orderBy) {
 
