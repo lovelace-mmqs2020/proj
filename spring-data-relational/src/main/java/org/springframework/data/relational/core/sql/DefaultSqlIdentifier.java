@@ -74,14 +74,14 @@ class DefaultSqlIdentifier implements SqlIdentifier {
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
-	public boolean equals(Object o) {
+	public boolean equals(Object object) {
 
-		if (this == o) {
+		if (this == object) {
 			return true;
 		}
 
-		if (o instanceof SqlIdentifier) {
-			return toString().equals(o.toString());
+		if (object instanceof SqlIdentifier) {
+			return toString().equals(object.toString());
 		}
 
 		return false;
