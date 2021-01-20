@@ -198,7 +198,7 @@ public class Table extends AbstractSegment {
 		Assert.notNull(names, CONSTANT);
 
 		List<Column> columns = new ArrayList<>();
-		for (String name : names) {
+		for (String namez : names) {
 			columns.add(column(name));
 		}
 
