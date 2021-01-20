@@ -51,8 +51,7 @@ import org.springframework.data.jdbc.repository.support.SimpleJdbcRepository;
 import org.springframework.data.relational.core.dialect.HsqlDbDialect;
 import org.springframework.data.relational.core.mapping.RelationalMappingContext;
 import org.springframework.data.relational.core.mapping.event.AfterDeleteEvent;
-import org.springframework.data.relational.core.mapping.event.AfterLoadEvent;
-import org.springframework.data.relational.core.mapping.event.AfterSaveEvent;
+import org.springframework.data.relational.core.mapping.event.RelationalEventWithIdAndEntity;
 import org.springframework.data.relational.core.mapping.event.BeforeDeleteEvent;
 import org.springframework.data.relational.core.mapping.event.BeforeSaveEvent;
 import org.springframework.data.relational.core.mapping.event.Identifier;
@@ -111,7 +110,7 @@ public class SimpleJdbcRepositoryEventsUnitTests {
 				.extracting(e -> (Class) e.getClass()) //
 				.containsExactly( //
 						BeforeSaveEvent.class, //
-						AfterSaveEvent.class //
+						RelationalEventWithIdAndEntity.class //
 				);
 	}
 
@@ -128,9 +127,9 @@ public class SimpleJdbcRepositoryEventsUnitTests {
 				.extracting(e -> (Class) e.getClass()) //
 				.containsExactly( //
 						BeforeSaveEvent.class, //
-						AfterSaveEvent.class, //
+						RelationalEventWithIdAndEntity.class, //
 						BeforeSaveEvent.class, //
-						AfterSaveEvent.class //
+						RelationalEventWithIdAndEntity.class //
 				);
 	}
 
@@ -179,8 +178,8 @@ public class SimpleJdbcRepositoryEventsUnitTests {
 		assertThat(publisher.events) //
 				.extracting(e -> (Class) e.getClass()) //
 				.containsExactly( //
-						AfterLoadEvent.class, //
-						AfterLoadEvent.class //
+						RelationalEventWithIdAndEntity.class, //
+						RelationalEventWithIdAndEntity.class //
 				);
 	}
 
@@ -198,8 +197,8 @@ public class SimpleJdbcRepositoryEventsUnitTests {
 		assertThat(publisher.events) //
 				.extracting(e -> (Class) e.getClass()) //
 				.containsExactly( //
-						AfterLoadEvent.class, //
-						AfterLoadEvent.class //
+						RelationalEventWithIdAndEntity.class, //
+						RelationalEventWithIdAndEntity.class //
 				);
 	}
 
@@ -216,7 +215,7 @@ public class SimpleJdbcRepositoryEventsUnitTests {
 		assertThat(publisher.events) //
 				.extracting(e -> (Class) e.getClass()) //
 				.containsExactly( //
-						AfterLoadEvent.class //
+						RelationalEventWithIdAndEntity.class //
 				);
 	}
 
@@ -234,8 +233,8 @@ public class SimpleJdbcRepositoryEventsUnitTests {
 		assertThat(publisher.events) //
 				.extracting(e -> (Class) e.getClass()) //
 				.containsExactly( //
-						AfterLoadEvent.class, //
-						AfterLoadEvent.class //
+						RelationalEventWithIdAndEntity.class, //
+						RelationalEventWithIdAndEntity.class //
 				);
 	}
 
@@ -254,8 +253,8 @@ public class SimpleJdbcRepositoryEventsUnitTests {
 		assertThat(publisher.events) //
 				.extracting(e -> (Class) e.getClass()) //
 				.containsExactly( //
-						AfterLoadEvent.class, //
-						AfterLoadEvent.class //
+						RelationalEventWithIdAndEntity.class, //
+						RelationalEventWithIdAndEntity.class //
 				);
 	}
 

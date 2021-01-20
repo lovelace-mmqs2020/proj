@@ -641,7 +641,7 @@ The following table describes the available events:
 | {javadoc-base}/org/springframework/data/relational/core/mapping/event/BeforeSaveEvent.html[`BeforeSaveEvent`]
 | Before an aggregate root gets saved (that is, inserted or updated but after the decision about whether if it gets updated or deleted was made).
 
-| {javadoc-base}org/springframework/data/relational/core/mapping/event/AfterSaveEvent.html[`AfterSaveEvent`]
+| {javadoc-base}org/springframework/data/relational/core/mapping/event/RelationalEventWithIdAndEntity.html[`RelationalEventWithIdAndEntity`]
 | After an aggregate root gets saved (that is, inserted or updated).
 
 | {javadoc-base}org/springframework/data/relational/core/mapping/event/AfterLoadEvent.html[`AfterLoadEvent`]

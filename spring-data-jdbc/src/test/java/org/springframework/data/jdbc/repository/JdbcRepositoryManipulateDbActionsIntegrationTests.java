@@ -213,7 +213,7 @@ public class JdbcRepositoryManipulateDbActionsIntegrationTests {
 		@Bean
 		ApplicationListener<BeforeSaveEvent> logOnSaveListener() {
 
-			// this would actually be easier to implement with an AfterSaveEvent listener, but we want to test AggregateChange
+			// this would actually be easier to implement with an RelationalEventWithIdAndEntity listener, but we want to test AggregateChange
 			// manipulation.
 			return event -> {
 

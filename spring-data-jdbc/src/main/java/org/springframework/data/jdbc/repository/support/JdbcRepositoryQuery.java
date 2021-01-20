@@ -30,7 +30,7 @@ import org.springframework.data.mapping.callback.EntityCallbacks;
 import org.springframework.data.relational.core.mapping.RelationalMappingContext;
 import org.springframework.data.relational.core.mapping.RelationalPersistentEntity;
 import org.springframework.data.relational.core.mapping.event.AfterLoadCallback;
-import org.springframework.data.relational.core.mapping.event.AfterLoadEvent;
+import org.springframework.data.relational.core.mapping.event.RelationalEventWithIdAndEntity;
 import org.springframework.data.relational.core.mapping.event.Identifier;
 import org.springframework.data.repository.query.Parameter;
 import org.springframework.data.repository.query.RepositoryQuery;
@@ -291,7 +291,7 @@ class JdbcRepositoryQuery implements RepositoryQuery {
 			Object identifier = e.getIdentifierAccessor(entity).getIdentifier();
 
 			if (identifier != null) {
-				publisher.publishEvent(new AfterLoadEvent(Identifier.of(identifier), entity));
+				publisher.publishEvent(new RelationalEventWithIdAndEntity(Identifier.of(identifier), entity, null));
 			}
 
 			callbacks.callback(AfterLoadCallback.class, entity);

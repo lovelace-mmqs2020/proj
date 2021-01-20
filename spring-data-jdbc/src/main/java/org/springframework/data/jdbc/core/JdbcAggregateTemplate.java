@@ -410,7 +410,7 @@ public class JdbcAggregateTemplate implements JdbcAggregateOperations {
 
 	private <T> T triggerAfterLoad(Object id, T entity) {
 
-		publisher.publishEvent(new AfterLoadEvent(Identifier.of(id), entity));
+		publisher.publishEvent(new RelationalEventWithIdAndEntity(Identifier.of(id), entity, null));
 
 		return entityCallbacks.callback(AfterLoadCallback.class, entity);
 	}
@@ -434,7 +434,7 @@ public class JdbcAggregateTemplate implements JdbcAggregateOperations {
 
 		Specified identifier = Identifier.of(id);
 
-		publisher.publishEvent(new AfterSaveEvent( //
+		publisher.publishEvent(new RelationalEventWithIdAndEntity( //
 				identifier, //
 				aggregateRoot, //
 				change //

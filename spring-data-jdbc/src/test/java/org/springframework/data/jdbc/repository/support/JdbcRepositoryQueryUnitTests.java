@@ -35,7 +35,7 @@ import org.springframework.data.jdbc.core.convert.RelationResolver;
 import org.springframework.data.mapping.callback.EntityCallbacks;
 import org.springframework.data.relational.core.mapping.RelationalMappingContext;
 import org.springframework.data.relational.core.mapping.event.AfterLoadCallback;
-import org.springframework.data.relational.core.mapping.event.AfterLoadEvent;
+import org.springframework.data.relational.core.mapping.event.RelationalEventWithIdAndEntity;
 import org.springframework.data.repository.query.DefaultParameters;
 import org.springframework.data.repository.query.Parameters;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -80,7 +80,7 @@ public class JdbcRepositoryQueryUnitTests {
 		this.context = mock(RelationalMappingContext.class, RETURNS_DEEP_STUBS);
 		this.converter = new BasicJdbcConverter(context, mock(RelationResolver.class));
 	}
- 
+
 
 	@Test // DATAJDBC-165
 	public void defaultRowMapperIsUsedByDefault() {
@@ -171,7 +171,7 @@ public class JdbcRepositoryQueryUnitTests {
 		new JdbcRepositoryQuery(publisher, callbacks, context, queryMethod, operations, defaultRowMapper, converter)
 				.execute(new Object[] {});
 
-		verify(publisher).publishEvent(any(AfterLoadEvent.class));
+		verify(publisher).publishEvent(any(RelationalEventWithIdAndEntity.class));
 	}
 
 	@Test // DATAJDBC-263, DATAJDBC-354
@@ -188,7 +188,7 @@ public class JdbcRepositoryQueryUnitTests {
 		new JdbcRepositoryQuery(publisher, callbacks, context, queryMethod, operations, defaultRowMapper, converter)
 				.execute(new Object[] {});
 
-		verify(publisher, times(2)).publishEvent(any(AfterLoadEvent.class));
+		verify(publisher, times(2)).publishEvent(any(RelationalEventWithIdAndEntity.class));
 	}
 
 	@Test // DATAJDBC-400
@@ -205,7 +205,7 @@ public class JdbcRepositoryQueryUnitTests {
 
 		new JdbcRepositoryQuery(publisher, callbacks, context, queryMethod, operations, defaultRowMapper, converter).execute(new Object[] {});
 
-		verify(publisher).publishEvent(any(AfterLoadEvent.class));
+		verify(publisher).publishEvent(any(RelationalEventWithIdAndEntity.class));
 		verify(callbacks).callback(AfterLoadCallback.class, dummyEntity);
 
 	}
