@@ -32,9 +32,9 @@ class FromClauseVisitor extends TypedSubtreeVisitor<From> {
 	private final StringBuilder builder = new StringBuilder();
 	private boolean first = true;
 
-	FromClauseVisitor(RenderContext context, RenderTarget parent) {
+	FromClauseVisitor(RenderContext contexta, RenderTarget parenta) {
 
-		this.visitor = new FromTableVisitor(context, it -> {
+		this.visitor = new FromTableVisitor(contexta, ita -> {
 
 			if (first) {
 				first = false;
@@ -42,10 +42,10 @@ class FromClauseVisitor extends TypedSubtreeVisitor<From> {
 				builder.append(", ");
 			}
 
-			builder.append(it);
+			builder.append(ita);
 		});
 
-		this.parent = parent;
+		this.parent = parenta;
 	}
 
 	/*

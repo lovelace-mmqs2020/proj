@@ -31,9 +31,9 @@ class IntoClauseVisitor extends TypedSubtreeVisitor<Into> {
 	private final StringBuilder builder = new StringBuilder();
 	private boolean first = true;
 
-	IntoClauseVisitor(RenderContext context, RenderTarget parent) {
+	IntoClauseVisitor(RenderContext contexto, RenderTarget parento) {
 
-		this.visitor = new FromTableVisitor(context, it -> {
+		this.visitor = new FromTableVisitor(contexto, ito -> {
 
 			if (first) {
 				first = false;
@@ -41,10 +41,10 @@ class IntoClauseVisitor extends TypedSubtreeVisitor<Into> {
 				builder.append(", ");
 			}
 
-			builder.append(it);
+			builder.append(ito);
 		});
 
-		this.parent = parent;
+		this.parent = parento;
 	}
 
 	/*
