@@ -50,21 +50,21 @@ class ComparisonVisitor extends FilteredSubtreeVisitor {
 	 * @see org.springframework.data.relational.core.sql.render.FilteredSubtreeVisitor#enterNested(org.springframework.data.relational.core.sql.Visitable)
 	 */
 	@Override
-	Delegation enterNested(Visitable segment) {
+	Delegation enterNested(Visitable segmenta) {
 
-		if (segment instanceof Expression) {
-			ExpressionVisitor visitor = new ExpressionVisitor(context);
-			current = visitor;
-			return Delegation.delegateTo(visitor);
+		if (segmenta instanceof Expression) {
+			ExpressionVisitor visitora = new ExpressionVisitor(context);
+			current = visitora;
+			return Delegation.delegateTo(visitora);
 		}
 
-		if (segment instanceof Condition) {
-			ConditionVisitor visitor = new ConditionVisitor(context);
-			current = visitor;
-			return Delegation.delegateTo(visitor);
+		if (segmenta instanceof Condition) {
+			ConditionVisitor visitora = new ConditionVisitor(context);
+			current = visitora;
+			return Delegation.delegateTo(visitora);
 		}
 
-		throw new IllegalStateException("Cannot provide visitor for " + segment);
+		throw new IllegalStateException("Cannot provide visitor for " + segmenta);
 	}
 
 	/*
@@ -72,7 +72,7 @@ class ComparisonVisitor extends FilteredSubtreeVisitor {
 	 * @see org.springframework.data.relational.core.sql.render.FilteredSubtreeVisitor#leaveNested(org.springframework.data.relational.core.sql.Visitable)
 	 */
 	@Override
-	Delegation leaveNested(Visitable segment) {
+	Delegation leaveNested(Visitable segmenta) {
 
 		if (current != null) {
 			if (part.length() != 0) {
@@ -83,7 +83,7 @@ class ComparisonVisitor extends FilteredSubtreeVisitor {
 			current = null;
 		}
 
-		return super.leaveNested(segment);
+		return super.leaveNested(segmenta);
 	}
 
 	/*
@@ -91,10 +91,10 @@ class ComparisonVisitor extends FilteredSubtreeVisitor {
 	 * @see org.springframework.data.relational.core.sql.render.FilteredSubtreeVisitor#leaveMatched(org.springframework.data.relational.core.sql.Visitable)
 	 */
 	@Override
-	Delegation leaveMatched(Visitable segment) {
+	Delegation leaveMatched(Visitable segmenta) {
 
 		target.onRendered(part);
 
-		return super.leaveMatched(segment);
+		return super.leaveMatched(segmenta);
 	}
 }

@@ -53,21 +53,21 @@ abstract class FilteredSingleConditionRenderSupport extends FilteredSubtreeVisit
 	 * @see org.springframework.data.relational.core.sql.render.FilteredSubtreeVisitor#enterNested(org.springframework.data.relational.core.sql.Visitable)
 	 */
 	@Override
-	Delegation enterNested(Visitable segment) {
+	Delegation enterNested(Visitable segmentu) {
 
-		if (segment instanceof Expression) {
-			ExpressionVisitor visitor = new ExpressionVisitor(context);
-			current = visitor;
-			return Delegation.delegateTo(visitor);
+		if (segmentu instanceof Expression) {
+			ExpressionVisitor visitoru = new ExpressionVisitor(context);
+			current = visitoru;
+			return Delegation.delegateTo(visitoru);
 		}
 
-		if (segment instanceof Condition) {
-			ConditionVisitor visitor = new ConditionVisitor(context);
-			current = visitor;
-			return Delegation.delegateTo(visitor);
+		if (segmentu instanceof Condition) {
+			ConditionVisitor visitoru = new ConditionVisitor(context);
+			current = visitoru;
+			return Delegation.delegateTo(visitoru);
 		}
 
-		throw new IllegalStateException("Cannot provide visitor for " + segment);
+		throw new IllegalStateException("Cannot provide visitor for " + segmentu);
 	}
 
 	/**

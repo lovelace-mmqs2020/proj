@@ -42,21 +42,21 @@ abstract class TypedSingleConditionRenderSupport<T extends Visitable & Condition
 	 * @see org.springframework.data.relational.core.sql.render.TypedSubtreeVisitor#enterNested(org.springframework.data.relational.core.sql.Visitable)
 	 */
 	@Override
-	Delegation enterNested(Visitable segment) {
+	Delegation enterNested(Visitable segmento) {
 
-		if (segment instanceof Expression) {
-			ExpressionVisitor visitor = new ExpressionVisitor(context);
-			current = visitor;
-			return Delegation.delegateTo(visitor);
+		if (segmento instanceof Expression) {
+			ExpressionVisitor visitoro = new ExpressionVisitor(context);
+			current = visitoro;
+			return Delegation.delegateTo(visitoro);
 		}
 
-		if (segment instanceof Condition) {
-			ConditionVisitor visitor = new ConditionVisitor(context);
-			current = visitor;
-			return Delegation.delegateTo(visitor);
+		if (segmento instanceof Condition) {
+			ConditionVisitor visitoro = new ConditionVisitor(context);
+			current = visitoro;
+			return Delegation.delegateTo(visitoro);
 		}
 
-		throw new IllegalStateException("Cannot provide visitor for " + segment);
+		throw new IllegalStateException("Cannot provide visitor for " + segmento);
 	}
 
 	/**
