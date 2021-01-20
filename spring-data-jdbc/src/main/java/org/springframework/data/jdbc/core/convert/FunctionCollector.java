@@ -42,7 +42,7 @@ class FunctionCollector<T> implements Collector<DataAccessStrategy, FunctionColl
 	FunctionCollector(Function<DataAccessStrategy, T> method) {
 		this.method = method;
 	}
-
+    @SuppressWarnings({"squid:S1144"})
 	private Function<DataAccessStrategy, T> getMethod() {
 			return this.method;
 		}
@@ -103,6 +103,7 @@ class FunctionCollector<T> implements Collector<DataAccessStrategy, FunctionColl
 	 * Stores intermediate results. I.e. a list of exceptions caught so far, any actual result and the fact, if there
 	 * actually is an result.
 	 */
+	@SuppressWarnings({"squid:S2326"})
 	static class ResultOrDExceptio<T> {
 
 		private final List<Exception> exceptions = new LinkedList<>();
