@@ -51,6 +51,7 @@ import org.springframework.jdbc.support.JdbcUtils;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
+import lombok.NonNull;
 
 /**
  * The default {@link DataAccessStrategy} is to generate SQL statements based on meta data from the entity.
@@ -214,29 +215,21 @@ public class DefaultDataAccessStrategy implements DataAccessStrategy {
 	 * @see org.springframework.data.jdbc.core.DataAccessStrategy#delete(java.lang.Object, org.springframework.data.mapping.PropertyPath)
 	 */
 	@Override
-	public void delete(Object rootId, PersistentPropertyPath<RelationalPersistentProperty> propertyPath) {
+	public void delete(Object rootId, @NonNull PersistentPropertyPath<RelationalPersistentProperty> propertyPath) {
 
 		RelationalPersistentEntity<?> rootEntity;
-		if(propertyPath != null) {
-			if(propertyPath.getBaseProperty()!=null){
-				if(propertyPath.getBaseProperty().getOwner()!=null){
-					rootEntity = context.getRequiredPersistentEntity(propertyPath.getBaseProperty().getOwner().getType());
-					if(rootEntity != null) {
-						RelationalPersistentProperty referencingProperty = propertyPath.getLeafProperty();
-						Assert.notNull(referencingProperty, "No property found matching the PropertyPath " + propertyPath);
 
-						String delete = sql(rootEntity.getType()).createDeleteByPath(propertyPath);
+		if (propertyPath.getBaseProperty().getOwner()!=null) {
+			rootEntity = context.getRequiredPersistentEntity(propertyPath.getBaseProperty().getOwner().getType());
+			RelationalPersistentProperty referencingProperty = propertyPath.getLeafProperty();
+			Assert.notNull(referencingProperty, "No property found matching the PropertyPath " + propertyPath);
 
-						SqlIdentifierParameterSource parameters = new SqlIdentifierParameterSource(getIdentifierProcessing());
-						parameters.addValue(ROOT_ID_PARAMETER, rootId);
-						operations.update(delete, parameters);
+			String delete = sql(rootEntity.getType()).createDeleteByPath(propertyPath);
 
-					}
-				}
-			}
+			SqlIdentifierParameterSource parameters = new SqlIdentifierParameterSource(getIdentifierProcessing());
+			parameters.addValue(ROOT_ID_PARAMETER, rootId);
+			operations.update(delete, parameters);
 		}
-
-		
 	}
 
 	/*
