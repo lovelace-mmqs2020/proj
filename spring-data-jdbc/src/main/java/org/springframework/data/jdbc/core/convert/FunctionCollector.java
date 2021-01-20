@@ -64,7 +64,7 @@ class FunctionCollector<T> implements Collector<DataAccessStrategy, FunctionColl
 			if (!roe.hasResult()) {
 
 				try {
-					roe.setResult(method.apply(das));
+					roe.setResult();
 				} catch (Exception ex) {
 					roe.add(ex);
 				}
@@ -84,7 +84,7 @@ class FunctionCollector<T> implements Collector<DataAccessStrategy, FunctionColl
 		};
 	}
 
-	
+
 
 	/*
 	 * (non-Javadoc)
@@ -108,7 +108,7 @@ class FunctionCollector<T> implements Collector<DataAccessStrategy, FunctionColl
 			return hasResult;
 		}
 
-		private void setResult(T result) {
+		private void setResult() {
 			hasResult = true;
 		}
 
@@ -119,7 +119,7 @@ class FunctionCollector<T> implements Collector<DataAccessStrategy, FunctionColl
 
 	static class CombinedDataAccessException extends DataAccessException {
 
-		
+
 
 		public CombinedDataAccessException(String msg) {
 			super(msg);
@@ -130,7 +130,7 @@ class FunctionCollector<T> implements Collector<DataAccessStrategy, FunctionColl
 		 */
 		private static final long serialVersionUID = 1L;
 
-		
+
 	}
 
 	@Override
