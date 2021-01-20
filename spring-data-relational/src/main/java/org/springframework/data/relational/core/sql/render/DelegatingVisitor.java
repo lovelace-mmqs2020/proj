@@ -15,6 +15,8 @@
  */
 package org.springframework.data.relational.core.sql.render;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Stack;
 
 import org.springframework.data.relational.core.sql.Visitable;
@@ -46,7 +48,7 @@ import lombok.NonNull;
  */
 abstract class DelegatingVisitor implements Visitor {
 
-	private Stack<DelegatingVisitor> delegation = new Stack<>();
+	private Deque <DelegatingVisitor> delegation = new ArrayDeque<DelegatingVisitor>();
 
 	/**
 	 * Invoked for a {@link Visitable segment} when entering the segment.
