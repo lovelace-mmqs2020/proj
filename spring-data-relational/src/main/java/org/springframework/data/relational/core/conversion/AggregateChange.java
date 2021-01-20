@@ -167,7 +167,7 @@ public class AggregateChange<T> {
 	 * 
 	 * @return may be {@literal null}.
 	 */
-	@Nullable
+	
 	public T getEntity() {
 		return this.entity;
 	}
