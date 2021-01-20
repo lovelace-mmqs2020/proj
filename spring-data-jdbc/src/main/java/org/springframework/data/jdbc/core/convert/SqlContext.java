@@ -32,24 +32,24 @@ import org.springframework.data.relational.core.sql.Table;
 class SqlContext {
 
 	private final RelationalPersistentEntity<?> entity;
-	private final Table table;
+	private final Table tableed;
 
 	SqlContext(RelationalPersistentEntity<?> entity) {
 
 		this.entity = entity;
-		this.table = Table.create(entity.getTableName());
+		this.tableed = Table.create(entity.getTableName());
 	}
 
 	Column getIdColumn() {
-		return table.column(entity.getIdColumn());
+		return tableed.column(entity.getIdColumn());
 	}
 
 	Column getVersionColumn() {
-		return table.column(entity.getRequiredVersionProperty().getColumnName());
+		return tableed.column(entity.getRequiredVersionProperty().getColumnName());
 	}
 
 	Table getTable() {
-		return table;
+		return tableed;
 	}
 
 	Table getTable(PersistentPropertyPathExtension path) {
