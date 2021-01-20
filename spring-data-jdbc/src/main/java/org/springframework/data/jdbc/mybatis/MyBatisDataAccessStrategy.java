@@ -279,7 +279,7 @@ public class MyBatisDataAccessStrategy implements DataAccessStrategy {
 
 		propB = propertyPath.getBaseProperty();
 
-		if ((propA == null) || (propB == null)) {
+		if (propB == null) {
 
 			throw new NullPointerException("Error: prop is null");
 		}
