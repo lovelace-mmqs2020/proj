@@ -573,6 +573,10 @@ public class DefaultDataAccessStrategy implements DataAccessStrategy {
 	 */
 	static class Predicates {
 
+		private Predicates() {
+			throw new IllegalStateException("Utility class");
+		  }
+
 		/**
 		 * Include all {@link Predicate} returning {@literal false} to never skip a property.
 		 *
