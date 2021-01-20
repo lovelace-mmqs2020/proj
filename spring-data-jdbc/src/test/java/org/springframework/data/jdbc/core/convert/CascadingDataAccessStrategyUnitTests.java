@@ -26,7 +26,7 @@ import java.util.Collections;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import org.springframework.data.jdbc.core.convert.FunctionCollector.CombinedDataAccessException;
+import org.springframework.dao.DataAccessException;
 import org.springframework.data.relational.core.mapping.RelationalPersistentProperty;
 
 /**
@@ -65,7 +65,7 @@ public class CascadingDataAccessStrategyUnitTests {
 
 		CascadingDataAccessStrategy access = new CascadingDataAccessStrategy(asList(alwaysFails, alwaysFails));
 
-		assertThatExceptionOfType(CombinedDataAccessException.class) //
+		assertThatExceptionOfType(DataAccessException.class) //
 				.isThrownBy(() -> access.findById(23L, String.class)) //
 				.withMessageContaining("Failed to perform data access with all available strategies") //
 				.withMessageContaining("Sorry I don't support this method") //

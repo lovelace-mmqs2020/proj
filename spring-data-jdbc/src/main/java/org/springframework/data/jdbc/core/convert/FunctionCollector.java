@@ -43,6 +43,10 @@ class FunctionCollector<T> implements Collector<DataAccessStrategy, FunctionColl
 		this.method = method;
 	}
 
+	private Function<DataAccessStrategy, T> getMethod() {
+			return this.method;
+		}
+
 	/*
 	 * (non-Javadoc)
 	 * @see java.util.stream.Collector#supplier()
@@ -115,22 +119,6 @@ class FunctionCollector<T> implements Collector<DataAccessStrategy, FunctionColl
 		public void add(Exception ex) {
 			exceptions.add(ex);
 		}
-	}
-
-	static class CombinedDataAccessException extends DataAccessException {
-
-
-
-		public CombinedDataAccessException(String msg) {
-			super(msg);
-		}
-
-		/**
-		 *
-		 */
-		private static final long serialVersionUID = 1L;
-
-
 	}
 
 	@Override
