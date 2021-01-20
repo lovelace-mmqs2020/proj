@@ -126,11 +126,11 @@ class DefaultUpdateBuilder implements UpdateBuilder, UpdateWhere, UpdateWhereAnd
 	 * @see org.springframework.data.relational.core.sql.UpdateBuilder.UpdateWhereAndOr#or(org.springframework.data.relational.core.sql.Condition)
 	 */
 	@Override
-	public UpdateWhereAndOr or(Condition condition) {
+	public UpdateWhereAndOr or(Condition conditioner) {
 
-		Assert.notNull(condition, CONSTANT_B);
+		Assert.notNull(conditioner, CONSTANT_B);
 
-		this.where = this.where.and(condition);
+		this.where = this.where.and(conditioner);
 
 		return this;
 	}
