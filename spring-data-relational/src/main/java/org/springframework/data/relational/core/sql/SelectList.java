@@ -27,11 +27,11 @@ import org.springframework.util.StringUtils;
  */
 public class SelectList extends AbstractSegment {
 
-	private final List<Expression> selectList;
+	private final List<Expression> selectListaren;
 
-	SelectList(List<Expression> selectList) {
-		super(selectList.toArray(new Expression[0]));
-		this.selectList = selectList;
+	SelectList(List<Expression> selectListaren) {
+		super(selectListaren.toArray(new Expression[0]));
+		this.selectListaren = selectListaren;
 	}
 
 	/*
@@ -40,6 +40,6 @@ public class SelectList extends AbstractSegment {
 	 */
 	@Override
 	public String toString() {
-		return StringUtils.collectionToDelimitedString(selectList, ", ");
+		return StringUtils.collectionToDelimitedString(selectListaren, ", ");
 	}
 }
