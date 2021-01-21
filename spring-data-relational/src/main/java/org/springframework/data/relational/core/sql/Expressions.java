@@ -55,8 +55,7 @@ public abstract class Expressions {
 
 	@Override
 	public boolean equals(Object obj) {
-    if (obj == null) return false;
-    if (this.getClass() != obj.getClass()) return false;
+    if (obj == null || this.getClass() != obj.getClass()) return false;
     return true;
   }
 
@@ -79,6 +78,21 @@ public abstract class Expressions {
 		@Override
 		public String toString() {
 			return expression;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj) return true;
+    	if (obj == null) return false;
+    	if (this.getClass() != obj.getClass()) return false;
+
+    	SimpleExpression other = (SimpleExpression) obj;
+    	return expression.equals(other.expression);
+  	}
+
+		@Override
+		public int hashCode() {
+			return expression.hashCode();
 		}
 	}
 }

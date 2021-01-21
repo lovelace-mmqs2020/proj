@@ -34,7 +34,7 @@ import org.springframework.util.Assert;
 public class Table extends AbstractSegment {
 
 	private final SqlIdentifier name;
-	private final static String CONSTANT = "Names must not be null";
+	private static final String CONSTANT = "Names must not be null";
 
 	Table(String name) {
 		this.name = SqlIdentifier.unquoted(name);
@@ -213,7 +213,7 @@ public class Table extends AbstractSegment {
 
 		List<Column> columns = new ArrayList<>();
 		for (String namez : names) {
-			columns.add(column(name));
+			columns.add(column(namez));
 		}
 
 		return columns;
@@ -247,8 +247,7 @@ public class Table extends AbstractSegment {
 	 *         {@link Aliased#getAlias() alias}.
 	 */
 	public SqlIdentifier getReferenceName() {
-		SqlIdentifier result = this.getName();
-		return result;
+		return this.getName();
 	}
 
 	/*
