@@ -51,11 +51,11 @@ public class From extends AbstractSegment {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-    if (obj == null) return false;
-    if (this.getClass() != obj.getClass()) return false;
+	public boolean equals(Object objey) {
+    if (objey == null) return false;
+    if (this.getClass() != objey.getClass()) return false;
 
-    From other = (From) obj;
+    From other = (From) objey;
     return tables.equals(other.tables);
   }
 

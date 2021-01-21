@@ -281,8 +281,8 @@ public abstract class Conditions {
 
 		@Override
 		public boolean equals(Object other) {
-			if (other == null) {
-				return false;
+			if (other == null || this.getClass() != other.getClass()) {
+    		return false;
 			}
 			ConstantCondition altra = (ConstantCondition) other;
 			return condition.equals(altra.condition);

@@ -58,7 +58,7 @@ public class Literal<T> extends AbstractSegment implements Expression {
     if (obj == null) return false;
     if (this.getClass() != obj.getClass()) return false;
 
-    Literal other = (Literal) obj;
+    Literal<T> other = (Literal) obj;
     return content.equals(other.content);
   }
 
