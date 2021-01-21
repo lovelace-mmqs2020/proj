@@ -29,12 +29,12 @@ import org.springframework.lang.Nullable;
  *
  * @author Mark Paluch
  */
-public class MappingRelationalEntityInformation<T, ID> extends PersistentEntityInformation<T, ID>
-		implements RelationalEntityInformation<T, ID> {
+public class MappingRelationalEntityInformation<T, I> extends PersistentEntityInformation<T, I>
+		implements RelationalEntityInformation<T, I> {
 
 	private final RelationalPersistentEntity<T> entityMetadata;
 	private final @Nullable SqlIdentifier customTableName;
-	private final Class<ID> fallbackIdType;
+	private final Class<I> fallbackIdType;
 
 	/**
 	 * Creates a new {@link MappingRelationalEntityInformation} for the given {@link RelationalPersistentEntity}.
@@ -52,7 +52,7 @@ public class MappingRelationalEntityInformation<T, ID> extends PersistentEntityI
 	 * @param entity must not be {@literal null}.
 	 * @param fallbackIdType can be {@literal null}.
 	 */
-	public MappingRelationalEntityInformation(RelationalPersistentEntity<T> entity, @Nullable Class<ID> fallbackIdType) {
+	public MappingRelationalEntityInformation(RelationalPersistentEntity<T> entity, @Nullable Class<I> fallbackIdType) {
 		this(entity, null, fallbackIdType);
 	}
 
@@ -77,13 +77,13 @@ public class MappingRelationalEntityInformation<T, ID> extends PersistentEntityI
 	 */
 	@SuppressWarnings("unchecked")
 	private MappingRelationalEntityInformation(RelationalPersistentEntity<T> entity, @Nullable String customTableName,
-											   @Nullable Class<ID> idType) {
+											   @Nullable Class<I> idType) {
 
 		super(entity);
 
 		this.entityMetadata = entity;
 		this.customTableName = customTableName == null ? null : SqlIdentifier.quoted(customTableName);
-		this.fallbackIdType = idType != null ? idType : (Class<ID>) Long.class;
+		this.fallbackIdType = idType != null ? idType : (Class<I>) Long.class;
 	}
 
 	/* (non-Javadoc)
@@ -101,7 +101,7 @@ public class MappingRelationalEntityInformation<T, ID> extends PersistentEntityI
 	 * @see org.springframework.data.repository.core.support.PersistentEntityInformation#getIdType()
 	 */
 	@Override
-	public Class<ID> getIdType() {
+	public Class<I> getIdType() {
 
 		if (this.entityMetadata.hasIdProperty()) {
 			return super.getIdType();

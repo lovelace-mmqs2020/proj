@@ -23,7 +23,7 @@ import org.springframework.data.repository.core.EntityInformation;
  *
  * @author Mark Paluch
  */
-public interface RelationalEntityInformation<T, ID> extends EntityInformation<T, ID> {
+public interface RelationalEntityInformation<T, I> extends EntityInformation<T, I> {
 
 	/**
 	 * Returns the name of the table the entity shall be persisted to.
