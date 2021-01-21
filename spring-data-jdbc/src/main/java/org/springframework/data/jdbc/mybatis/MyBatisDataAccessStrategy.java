@@ -48,8 +48,6 @@ import org.springframework.data.relational.core.sql.SqlIdentifier;
 import org.springframework.data.relational.domain.Identifier;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.util.Assert;
-import lombok.NonNull;
-import org.springframework.data.relational.core.mapping.RelationalPersistentEntity;
 
 /**
  * {@link DataAccessStrategy} implementation based on MyBatis. Each method gets mapped to a statement. The name of the
@@ -247,7 +245,6 @@ public class MyBatisDataAccessStrategy implements DataAccessStrategy {
 				MyBatisContext parameter = new MyBatisContext(rootId, null, leafType, Collections.emptyMap());
 				sqlSession().delete(statement, parameter);
 			} catch(Exception e) {
-				return;
 			}
 
 		}
@@ -293,7 +290,6 @@ public class MyBatisDataAccessStrategy implements DataAccessStrategy {
 				sqlSession().delete(statement, parameter);
 
 			} catch(Exception e) {
-				return;
 		}
 	}
 	}
