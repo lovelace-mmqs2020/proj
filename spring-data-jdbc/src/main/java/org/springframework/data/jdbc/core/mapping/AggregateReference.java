@@ -25,14 +25,14 @@ import org.springframework.lang.Nullable;
  * A reference to the aggregate root of a different aggregate.
  *
  * @param <T> the type of the referenced aggregate root.
- * @param <ID> the type of the id of the referenced aggregate root.
+ * @param <I> the type of the id of the referenced aggregate root.
  * @author Jens Schauder
  * @author Myeonghyeon Lee
  * @since 1.0
  */
-public interface AggregateReference<T, ID> {
+public interface AggregateReference<T, I> {
 
-	static <T, ID> AggregateReference<T, ID> to(ID id) {
+	static <T, I> AggregateReference<T, I> to(I id) {
 		return new IdOnlyAggregateReference<>(id);
 	}
 
@@ -40,24 +40,24 @@ public interface AggregateReference<T, ID> {
 	 * @return the id of the referenced aggregate. May be {@code null}.
 	 */
 	@Nullable
-	ID getId();
+	I getId();
 
 	/**
 	 * An {@link AggregateReference} that only holds the id of the referenced aggregate root. Note that there is no check
 	 * that a matching aggregate for this id actually exists.
-	 * 
+	 *
 	 * @param <T>
 	 * @param <ID>
 	 */
 	@RequiredArgsConstructor
 	@EqualsAndHashCode
 	@ToString
-	class IdOnlyAggregateReference<T, ID> implements AggregateReference<T, ID> {
+	class IdOnlyAggregateReference<T, I> implements AggregateReference<T, I> {
 
-		private final ID id;
+		private final I id;
 
 		@Override
-		public ID getId() {
+		public I getId() {
 			return id;
 		}
 	}
