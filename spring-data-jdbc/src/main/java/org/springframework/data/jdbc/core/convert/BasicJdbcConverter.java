@@ -49,7 +49,6 @@ import org.springframework.data.util.ClassTypeInformation;
 import org.springframework.data.util.TypeInformation;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
-import org.springframework.core.annotation.AnnotationUtils;
 
 /**
  * {@link RelationalConverter} that uses a {@link MappingContext} to apply basic conversion of relational values to
@@ -75,7 +74,7 @@ public class BasicJdbcConverter extends BasicRelationalConverter implements Jdbc
 	private final IdentifierProcessing identifierProcessing = HsqlDbDialect.INSTANCE.getIdentifierProcessing();
 
 	private final RelationResolver relationResolver;
-	private final String errore = "Errore";
+	private static final String errore = "Errore";
 
 	/**
 	 * Creates a new {@link BasicRelationalConverter} given {@link MappingContext} and a
@@ -542,8 +541,8 @@ public class BasicJdbcConverter extends BasicRelationalConverter implements Jdbc
 
 			try {
 				return resultSet.getObject(backreferenceName);
-			} catch (SQLException o_O) {
-				throw new MappingException(String.format("Could not read value %s from result set!", backreferenceName), o_O);
+			} catch (SQLException e) {
+				throw new MappingException(String.format("Could not read value %s from result set!", backreferenceName), e);
 			}
 		}
 
