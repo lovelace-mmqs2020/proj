@@ -46,8 +46,8 @@ import org.springframework.util.Assert;
  * @author Oliver Gierke
  * @author Mark Paluch
  */
-public class JdbcRepositoryFactoryBean<T extends Repository<S, ID>, S, ID extends Serializable>
-		extends TransactionalRepositoryFactoryBeanSupport<T, S, ID> implements ApplicationEventPublisherAware {
+public class JdbcRepositoryFactoryBean<T extends Repository<S, I>, S, I extends Serializable>
+		extends TransactionalRepositoryFactoryBeanSupport<T, S, I> implements ApplicationEventPublisherAware {
 
 	private ApplicationEventPublisher publisher;
 	private BeanFactory beanFactory;
@@ -126,7 +126,7 @@ public class JdbcRepositoryFactoryBean<T extends Repository<S, ID>, S, ID extend
 	 * @param rowMapperMap can be {@literal null}. {@link #afterPropertiesSet()} defaults to {@link RowMapperMap#EMPTY} if
 	 *          {@literal null}.
 	 */
-	
+
 	@Autowired(required = false)
 	public void setRowMapperMap(RowMapperMap rowMapperMap) {
 		setQueryMappingConfiguration(rowMapperMap);

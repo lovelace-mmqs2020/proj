@@ -95,18 +95,18 @@ public class JdbcRepositoryFactory extends RepositoryFactorySupport {
 	/**
 	 * @param rowMapperMap must not be {@literal null} consider {@link RowMapperMap#EMPTY} instead.
 	 */
-	
+
 	public void setRowMapperMap(RowMapperMap rowMapperMap) {
 		setQueryMappingConfiguration(rowMapperMap);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T, ID> EntityInformation<T, ID> getEntityInformation(Class<T> aClass) {
+	public <T, I> EntityInformation<T, I> getEntityInformation(Class<T> aClass) {
 
 		RelationalPersistentEntity<?> entity = context.getRequiredPersistentEntity(aClass);
 
-		return (EntityInformation<T, ID>) new PersistentEntityInformation<>(entity);
+		return (EntityInformation<T, I>) new PersistentEntityInformation<>(entity);
 	}
 
 	/*

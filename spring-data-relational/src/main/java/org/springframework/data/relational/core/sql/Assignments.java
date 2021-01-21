@@ -24,7 +24,7 @@ package org.springframework.data.relational.core.sql;
  * @see Expressions
  * @see Functions
  */
-public abstract class Assignments {
+public interface Assignments {
 
 	/**
 	 * Creates a {@link AssignValue value} assignment to a {@link Column} given an {@link Expression}.
@@ -36,7 +36,4 @@ public abstract class Assignments {
 	public static AssignValue value(Column target, Expression value) {
 		return AssignValue.create(target, value);
 	}
-
-	// Utility constructor.
-	private Assignments() {}
 }

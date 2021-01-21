@@ -77,7 +77,7 @@ public class PostgresDialect extends AbstractDialect {
 		}
 	};
 
-	private final PostgresArrayColumns ARRAY_COLUMNS = new PostgresArrayColumns();
+	private final PostgresArrayColumns arrayColumns = new PostgresArrayColumns();
 
 	/*
 	 * (non-Javadoc)
@@ -94,7 +94,7 @@ public class PostgresDialect extends AbstractDialect {
 	 */
 	@Override
 	public ArrayColumns getArraySupport() {
-		return ARRAY_COLUMNS;
+		return arrayColumns;
 	}
 
 	@RequiredArgsConstructor

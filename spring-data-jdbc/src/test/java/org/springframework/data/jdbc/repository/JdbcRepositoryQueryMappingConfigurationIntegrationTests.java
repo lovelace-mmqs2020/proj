@@ -85,8 +85,7 @@ public class JdbcRepositoryQueryMappingConfigurationIntegrationTests {
 		carRepository.save(new Car(null, "Some model"));
 		Iterable<Car> cars = carRepository.customFindAll();
 
-		assertThat(cars).hasSize(1);
-		assertThat(cars).allMatch(car -> CAR_MODEL.equals(car.getModel()));
+		assertThat(cars).hasSize(1).allMatch(car -> CAR_MODEL.equals(car.getModel()));
 	}
 
 	interface CarRepository extends CrudRepository<Car, Long> {

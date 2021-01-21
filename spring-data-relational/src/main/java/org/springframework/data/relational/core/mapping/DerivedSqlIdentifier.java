@@ -97,8 +97,7 @@ class DerivedSqlIdentifier implements SqlIdentifier {
 	 */
 	@Override
 	public int hashCode() {
-		int newHash = toString().hashCode();
-		return newHash;
+		return toString().hashCode();
 	}
 
 	/*
@@ -107,8 +106,7 @@ class DerivedSqlIdentifier implements SqlIdentifier {
 	 */
 	@Override
 	public String toString() {
-		boolean result = quoted == true;
-		if (result) {
+		if (quoted) {
 			return toSql(IdentifierProcessing.ANSI);
 		}
 

@@ -40,7 +40,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class SimpleJdbcRepository<T, ID> implements PagingAndSortingRepository<T, ID> {
+public class SimpleJdbcRepository<T, I> implements PagingAndSortingRepository<T, I> {
 
 	private final @NonNull JdbcAggregateOperations entityOperations;
 	private final @NonNull PersistentEntity<T, ?> entity;
@@ -73,7 +73,7 @@ public class SimpleJdbcRepository<T, ID> implements PagingAndSortingRepository<T
 	 * @see org.springframework.data.repository.CrudRepository#findOne(java.io.Serializable)
 	 */
 	@Override
-	public Optional<T> findById(ID id) {
+	public Optional<T> findById(I id) {
 		return Optional.ofNullable(entityOperations.findById(id, entity.getType()));
 	}
 
@@ -82,7 +82,7 @@ public class SimpleJdbcRepository<T, ID> implements PagingAndSortingRepository<T
 	 * @see org.springframework.data.repository.CrudRepository#exists(java.io.Serializable)
 	 */
 	@Override
-	public boolean existsById(ID id) {
+	public boolean existsById(I id) {
 		return entityOperations.existsById(id, entity.getType());
 	}
 
@@ -100,7 +100,7 @@ public class SimpleJdbcRepository<T, ID> implements PagingAndSortingRepository<T
 	 * @see org.springframework.data.repository.CrudRepository#findAll(java.lang.Iterable)
 	 */
 	@Override
-	public Iterable<T> findAllById(Iterable<ID> ids) {
+	public Iterable<T> findAllById(Iterable<I> ids) {
 		return entityOperations.findAllById(ids, entity.getType());
 	}
 
@@ -119,7 +119,7 @@ public class SimpleJdbcRepository<T, ID> implements PagingAndSortingRepository<T
 	 */
 	@Transactional
 	@Override
-	public void deleteById(ID id) {
+	public void deleteById(I id) {
 		entityOperations.deleteById(id, entity.getType());
 	}
 

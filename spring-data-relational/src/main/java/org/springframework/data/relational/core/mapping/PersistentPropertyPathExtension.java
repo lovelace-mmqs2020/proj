@@ -42,7 +42,7 @@ public class PersistentPropertyPathExtension {
 	private final MappingContext<RelationalPersistentEntity<?>, RelationalPersistentProperty> context;
 
 	private final Lazy<SqlIdentifier> columnAlias = Lazy.of(() -> prefixWithTableAlias(getColumnName()));
-	private final String pathErrorMessage = "Path is null";
+	private static final String pathErrorMessage = "Path is null";
 
 	/**
 	 * Creates the empty path referencing the root itself.

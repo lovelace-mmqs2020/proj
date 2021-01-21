@@ -55,7 +55,7 @@ class WritingContext {
 		this.root = root;
 		this.entity = aggregateChange.getEntity();
 		this.entityType = aggregateChange.getEntityType();
-		this.paths = context.findPersistentPropertyPaths(entityType, (p) -> p.isEntity() && !p.isEmbedded());
+		this.paths = context.findPersistentPropertyPaths(entityType, p -> p.isEntity() && !p.isEmbedded());
 	}
 
 	/**
@@ -215,7 +215,7 @@ class WritingContext {
 
 			pathNodes.forEach(parentNode -> {
 
-	
+
 				Object parentValue = parentNode.getActualValue();
 
 				Object value = path.getRequiredLeafProperty().getOwner().getPropertyAccessor(parentValue)

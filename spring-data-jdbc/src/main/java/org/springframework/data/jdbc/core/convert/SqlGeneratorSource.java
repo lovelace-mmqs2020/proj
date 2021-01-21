@@ -34,7 +34,7 @@ import org.springframework.util.ConcurrentReferenceHashMap;
 @RequiredArgsConstructor
 public class SqlGeneratorSource {
 
-	private final Map<Class<?>, SqlGenerator> CACHE = new ConcurrentReferenceHashMap<>();
+	private final Map<Class<?>, SqlGenerator> cache = new ConcurrentReferenceHashMap<>();
 	private final RelationalMappingContext context;
 	private final JdbcConverter converter;
 	private final Dialect dialect;
@@ -49,7 +49,7 @@ public class SqlGeneratorSource {
 
 	SqlGenerator getSqlGenerator(Class<?> domainType) {
 
-		return CACHE.computeIfAbsent(domainType,
+		return cache.computeIfAbsent(domainType,
 				t -> new SqlGenerator(context, converter, context.getRequiredPersistentEntity(t), dialect));
 	}
 }

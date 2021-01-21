@@ -213,10 +213,7 @@ class JdbcRepositoryQuery implements RepositoryQuery {
 
 		MapSqlParameterSource parameters = new MapSqlParameterSource();
 
-		queryMethod.getParameters().getBindableParameters().forEach(p -> {
-
-			convertAndAddParameter(parameters, p, objects[p.getIndex()]);
-		});
+		queryMethod.getParameters().getBindableParameters().forEach(p -> convertAndAddParameter(parameters, p, objects[p.getIndex()]));
 
 		return parameters;
 	}

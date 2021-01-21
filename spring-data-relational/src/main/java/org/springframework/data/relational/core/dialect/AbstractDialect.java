@@ -22,6 +22,7 @@ import java.util.function.Function;
 
 import org.springframework.data.relational.core.sql.Select;
 import org.springframework.data.relational.core.sql.render.SelectRenderContext;
+import org.springframework.data.relational.core.dialect.LimitClause.Position;
 
 /**
  * Base class for {@link Dialect} implementations.
@@ -54,14 +55,10 @@ public abstract class AbstractDialect implements Dialect {
 
 		LimitClause limit = limit();
 
-		switch (limit.getClausePosition()) {
-
-			case AFTER_ORDER_BY:
-				afterOrderBy = new AfterOrderByLimitRenderFunction(limit);
-				break;
-
-			default:
-				throw new UnsupportedOperationException(String.format("Clause position %s not supported!", limit));
+		if (limit.getClausePosition().equals(LimitClause.Position.AFTER_ORDER_BY)) {
+			afterOrderBy = new AfterOrderByLimitRenderFunction(limit);
+		} else {
+			throw new UnsupportedOperationException(String.format("Clause position %s not supported!", limit));
 		}
 
 		return afterOrderBy.andThen(PrependWithLeadingWhitespace.INSTANCE);

@@ -15,7 +15,6 @@
  */
 package org.springframework.data.relational.core.conversion;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -267,7 +266,7 @@ public interface DbAction<T> {
 		 */
 		Map<PersistentPropertyPath<RelationalPersistentProperty>, Object> getQualifiers();
 
-		
+
 		// PropertyPathWithMapIndex, PropertyPathInSet, PropertyPathWithoutQualifier
 		// Probably we need better names.
 		@Nullable
