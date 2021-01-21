@@ -17,7 +17,6 @@ package org.springframework.data.relational.core.sql.render;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.Stack;
 
 import org.springframework.data.relational.core.sql.Visitable;
 import org.springframework.data.relational.core.sql.Visitor;
@@ -48,7 +47,7 @@ import lombok.NonNull;
  */
 abstract class DelegatingVisitor implements Visitor {
 
-	private Deque <DelegatingVisitor> delegation = new ArrayDeque<DelegatingVisitor>();
+	private Deque <DelegatingVisitor> delegation = new ArrayDeque<>();
 
 	/**
 	 * Invoked for a {@link Visitable segment} when entering the segment.
@@ -151,8 +150,8 @@ abstract class DelegatingVisitor implements Visitor {
 	 */
 	static class Delegation {
 
-		private static Delegation RETAINV = new Delegation(true, false, null);
-		private static Delegation LEAVEV = new Delegation(false, true, null);
+		private static Delegation retainV = new Delegation(true, false, null);
+		private static Delegation leaveV = new Delegation(false, true, null);
 
 		private final boolean retain;
 		private final boolean leave;
@@ -166,11 +165,11 @@ abstract class DelegatingVisitor implements Visitor {
 		}
 
 		public static Delegation retain() {
-			return RETAINV;
+			return retainV;
 		}
 
 		public static Delegation leave() {
-			return LEAVEV;
+			return leaveV;
 		}
 
 		public static Delegation delegateTo(DelegatingVisitor visitor) {
