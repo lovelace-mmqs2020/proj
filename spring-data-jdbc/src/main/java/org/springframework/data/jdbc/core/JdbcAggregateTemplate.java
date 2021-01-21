@@ -67,9 +67,9 @@ public class JdbcAggregateTemplate implements JdbcAggregateOperations {
 	private final AggregateChangeExecutor executor;
 
 	private EntityCallbacks entityCallbacks = EntityCallbacks.create();
-	private final String aggregateErrorMessage = "Aggregate instance must not be null!";
-	private final String idErrorMessage = "Id must not be null!";
-	private final String domainErrorMessage = "Domain type must not be null!";
+	private final static String aggregateErrorMessage = "Aggregate instance must not be null!";
+	private final static String idErrorMessage = "Id must not be null!";
+	private final static String domainErrorMessage = "Domain type must not be null!";
 
 	/**
 	 * Creates a new {@link JdbcAggregateTemplate} given {@link ApplicationContext}, {@link RelationalMappingContext} and
