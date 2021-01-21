@@ -24,9 +24,9 @@ import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
-import org.springframework.dao.DataAccessException;
+
+
 
 /**
  * {@link Collector} which invokes functions on the elements of a {@link java.util.stream.Stream} containing

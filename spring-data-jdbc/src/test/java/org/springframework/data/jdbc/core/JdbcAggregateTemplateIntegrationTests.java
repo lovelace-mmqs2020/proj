@@ -614,64 +614,8 @@ public class JdbcAggregateTemplateIntegrationTests {
 		assertThat(reloaded.id).isEqualTo(saved.id);
 		assertThat(reloaded.binaryData).isEqualTo(new byte[] { 1, 23, 42 });
 	}
-
-	@Test // DATAJDBC-340
-	public void saveAndLoadLongChain() {
-
-		Chain4 chain4 = new Chain4();
-		chain4.fourValue = "omega";
-		chain4.chain3 = new Chain3();
-		chain4.chain3.threeValue = "delta";
-		chain4.chain3.chain2 = new Chain2();
-		chain4.chain3.chain2.twoValue = "gamma";
-		chain4.chain3.chain2.chain1 = new Chain1();
-		chain4.chain3.chain2.chain1.oneValue = "beta";
-		chain4.chain3.chain2.chain1.chain0 = new Chain0();
-		chain4.chain3.chain2.chain1.chain0.zeroValue = "alpha";
-
-		template.save(chain4);
-
-		Chain4 reloaded = template.findById(chain4.four, Chain4.class);
-
-		assertThat(reloaded).isNotNull();
-
-		assertThat(reloaded.four).isEqualTo(chain4.four);
-		assertThat(reloaded.chain3.chain2.chain1.chain0.zeroValue).isEqualTo(chain4.chain3.chain2.chain1.chain0.zeroValue);
-
-		template.delete(chain4, Chain4.class);
-
-		assertThat(count("CHAIN0")).isEqualTo(0);
-	}
-
-	@Test // DATAJDBC-359
-	public void saveAndLoadLongChainWithoutIds() {
-
-		NoIdChain4 chain4 = new NoIdChain4();
-		chain4.fourValue = "omega";
-		chain4.chain3 = new NoIdChain3();
-		chain4.chain3.threeValue = "delta";
-		chain4.chain3.chain2 = new NoIdChain2();
-		chain4.chain3.chain2.twoValue = "gamma";
-		chain4.chain3.chain2.chain1 = new NoIdChain1();
-		chain4.chain3.chain2.chain1.oneValue = "beta";
-		chain4.chain3.chain2.chain1.chain0 = new NoIdChain0();
-		chain4.chain3.chain2.chain1.chain0.zeroValue = "alpha";
-
-		template.save(chain4);
-
-		assertThat(chain4.four).isNotNull();
-
-		NoIdChain4 reloaded = template.findById(chain4.four, NoIdChain4.class);
-
-		assertThat(reloaded).isNotNull();
-
-		assertThat(reloaded.four).isEqualTo(chain4.four);
-		assertThat(reloaded.chain3.chain2.chain1.chain0.zeroValue).isEqualTo(chain4.chain3.chain2.chain1.chain0.zeroValue);
-
-		template.delete(chain4, NoIdChain4.class);
-
-		assertThat(count("CHAIN0")).isEqualTo(0);
-	}
+  
+    
 
 	@Test // DATAJDBC-223
 	public void saveAndLoadLongChainOfListsWithoutIds() {

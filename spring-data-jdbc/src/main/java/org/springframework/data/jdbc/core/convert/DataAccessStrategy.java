@@ -195,7 +195,7 @@ public interface DataAccessStrategy extends RelationResolver {
 
 		Object rootId = identifier.toMap().get(path.getRequiredLeafProperty().getReverseColumnName());
 		return findAllByProperty(rootId, path.getRequiredLeafProperty());
-	};
+	}
 
 	/**
 	 * Finds all entities reachable via {@literal property} from the instance identified by {@literal rootId}.

@@ -32,14 +32,7 @@ public class IdOnlyAggregateReferenceTest {
 		assertThat(reference2).isNotEqualTo(reference1);
 	}
 
-	@Test // DATAJDBC-427
-	public void hashCodeTest() {
-
-		AggregateReference<DummyEntity, String> reference1 = AggregateReference.to("1");
-		AggregateReference<DummyEntity, String> reference2 = AggregateReference.to("1");
-
-		assertThat(reference1.hashCode()).isEqualTo(reference2.hashCode());
-	}
+	
 
 	private static class DummyEntity {
 		private String id;

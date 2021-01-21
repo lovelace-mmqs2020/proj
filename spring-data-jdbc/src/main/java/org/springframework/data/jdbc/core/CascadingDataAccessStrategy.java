@@ -15,7 +15,7 @@
  */
 package org.springframework.data.jdbc.core;
 
-import java.util.List;
+
 
 import org.springframework.data.jdbc.core.convert.DataAccessStrategy;
 
