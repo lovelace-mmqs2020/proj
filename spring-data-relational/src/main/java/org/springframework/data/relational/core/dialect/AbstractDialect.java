@@ -22,7 +22,6 @@ import java.util.function.Function;
 
 import org.springframework.data.relational.core.sql.Select;
 import org.springframework.data.relational.core.sql.render.SelectRenderContext;
-import org.springframework.data.relational.core.dialect.LimitClause.Position;
 
 /**
  * Base class for {@link Dialect} implementations.
