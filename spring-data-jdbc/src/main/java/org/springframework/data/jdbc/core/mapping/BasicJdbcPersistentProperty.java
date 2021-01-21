@@ -60,6 +60,6 @@ public class BasicJdbcPersistentProperty extends BasicRelationalPersistentProper
 
 	@Override
 	public int hashCode() {
-		return (int) getProperty().hashCode() * getOwner().hashCode();
+		return getProperty().hashCode() * getOwner().hashCode();
 	}
 }
