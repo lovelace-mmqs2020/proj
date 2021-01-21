@@ -15,30 +15,3 @@
  */
 package org.springframework.data.jdbc.core.convert;
 
-import lombok.experimental.UtilityClass;
-
-/**
- * A collection of utility methods for dealing with arrays.
- *
- * @author Jens Schauder
- * @since 1.1
- */
-@UtilityClass
-class ArrayUtil {
-
-	/**
-	 * Converts an {@code Byte[]} into a {@code byte[]}.
-	 *
-	 * @param byteArray the array to be converted. Must not be {@literal null}.
-	 * @return a {@code byte[]} of same size with the unboxed values of the input array. Guaranteed to be not
-	 *         {@literal null}.
-	 */
-	static byte[] toPrimitiveByteArray(Byte[] byteArray) {
-
-		byte[] bytes = new byte[byteArray.length];
-		for (int i = 0; i < byteArray.length; i++) {
-			bytes[i] = byteArray[i];
-		}
-		return bytes;
-	}
-}
