@@ -36,6 +36,8 @@ public abstract class Conditions {
 	private static final String ERROR_MESSAGE = "Comparison column or expression must not be null";
 	private static final String ERROR_MESSAGE_EX =  "Expression argument must not be null";
 
+
+
 	/**
 	 * Creates a plain {@code sql} {@link Condition}.
 	 *
@@ -279,8 +281,16 @@ public abstract class Conditions {
 
 		@Override
 		public boolean equals(Object other) {
+			if (other == null) {
+				return false;
+			}
 			ConstantCondition altra = (ConstantCondition) other;
 			return condition.equals(altra.condition);
+		}
+
+		@Override
+		public int hashCode() {
+			return condition.hashCode();
 		}
 	}
 
