@@ -238,15 +238,12 @@ public class MyBatisDataAccessStrategy implements DataAccessStrategy {
 			throw new NullPointerException("Error: prop is null");
 		}
 		else {
-			try {
+
 				ownerType = prop.getOwner().getType();
 				String statement = namespace(ownerType) + ".delete-" + toDashPath(propertyPath);
 				Class<?> leafType = propertyPath.getRequiredLeafProperty().getTypeInformation().getType();
 				MyBatisContext parameter = new MyBatisContext(rootId, null, leafType, Collections.emptyMap());
 				sqlSession().delete(statement, parameter);
-			} catch(Exception e) {
-			}
-
 		}
 	}
 
@@ -281,7 +278,6 @@ public class MyBatisDataAccessStrategy implements DataAccessStrategy {
 			throw new NullPointerException("Error: prop is null");
 		}
 		else {
-			try {
 				baseType = propB.getOwner().getType();
 				Class<?> leafType = propA.getTypeInformation().getType();
 
@@ -289,8 +285,6 @@ public class MyBatisDataAccessStrategy implements DataAccessStrategy {
 				MyBatisContext parameter = new MyBatisContext(null, null, leafType, Collections.emptyMap());
 				sqlSession().delete(statement, parameter);
 
-			} catch(Exception e) {
-		}
 	}
 	}
 
