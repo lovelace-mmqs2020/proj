@@ -33,8 +33,8 @@ import org.springframework.util.Assert;
  */
 public abstract class Conditions {
 
-	private final static String ERROR_MESSAGE = "Comparison column or expression must not be null";
-	private final static String ERROR_MESSAGE_EX =  "Expression argument must not be null";
+	private static final String ERROR_MESSAGE = "Comparison column or expression must not be null";
+	private static final String ERROR_MESSAGE_EX =  "Expression argument must not be null";
 
 	/**
 	 * Creates a plain {@code sql} {@link Condition}.
@@ -275,6 +275,12 @@ public abstract class Conditions {
 		@Override
 		public String toString() {
 			return condition;
+		}
+
+		@Override
+		public boolean equals(Object other) {
+			ConstantCondition altra = (ConstantCondition) other;
+			return condition.equals(altra.condition);
 		}
 	}
 
