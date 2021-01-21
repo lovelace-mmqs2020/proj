@@ -95,7 +95,7 @@ public class JdbcRepositoryIdGenerationIntegrationTests {
 
 		PrimitiveIdEntity saved = primitiveIdRepository.save(entity);
 
-		assertThat(saved.getId()).isNotEqualTo(0L);
+		assertThat(saved.getId()).isNotZero();
 
 		assertThat(primitiveIdRepository.findById(saved.getId())).hasValueSatisfying(it -> {
 

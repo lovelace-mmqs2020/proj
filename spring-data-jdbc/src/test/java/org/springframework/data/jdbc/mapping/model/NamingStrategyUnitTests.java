@@ -74,7 +74,7 @@ public class NamingStrategyUnitTests {
 
 	@Test // DATAJDBC-184
 	public void getSchema() {
-		assertThat(target.getSchema()).isEqualTo("");
+		assertThat(target.getSchema()).isEmpty();
 	}
 
 	@Test // DATAJDBC-184

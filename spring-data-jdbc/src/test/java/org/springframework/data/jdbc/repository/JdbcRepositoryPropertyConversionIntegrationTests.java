@@ -137,7 +137,7 @@ public class JdbcRepositoryPropertyConversionIntegrationTests {
 
 		repository.deleteAll(singletonList(entity));
 
-		assertThat(repository.findAll()).hasSize(0);
+		assertThat(repository.findAll()).isEmpty();
 	}
 
 	@Test // DATAJDBC-95
@@ -148,7 +148,7 @@ public class JdbcRepositoryPropertyConversionIntegrationTests {
 
 		repository.deleteById(entity.getIdTimestamp());
 
-		assertThat(repository.findAll()).hasSize(0);
+		assertThat(repository.findAll()).isEmpty();
 	}
 
 	private static EntityWithColumnsRequiringConversions createDummyEntity() {

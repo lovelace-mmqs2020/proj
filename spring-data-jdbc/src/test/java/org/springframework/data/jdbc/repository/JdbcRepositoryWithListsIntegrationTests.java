@@ -195,7 +195,7 @@ public class JdbcRepositoryWithListsIntegrationTests {
 		assertThat(repository.findById(entity.id)).isEmpty();
 
 		Long count = template.queryForObject("SELECT count(1) FROM Element", new HashMap<>(), Long.class);
-		assertThat(count).isEqualTo(0);
+		assertThat(count).isZero();
 	}
 
 	private Element createElement(String content) {

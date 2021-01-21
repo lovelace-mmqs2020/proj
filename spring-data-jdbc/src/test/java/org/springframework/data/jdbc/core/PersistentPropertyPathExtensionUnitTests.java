@@ -114,7 +114,7 @@ public class PersistentPropertyPathExtensionUnitTests {
 
 		assertSoftly(softly -> {
 
-			softly.assertThat(extPath(entity).getTableAlias()).isEqualTo(null);
+			softly.assertThat(extPath(entity).getTableAlias()).isNull();
 			softly.assertThat(extPath("second").getTableAlias()).isEqualTo(quoted("second"));
 			softly.assertThat(extPath("second.third2").getTableAlias()).isEqualTo(quoted("second"));
 			softly.assertThat(extPath("second.third2.value").getTableAlias()).isEqualTo(quoted("second"));
@@ -148,12 +148,12 @@ public class PersistentPropertyPathExtensionUnitTests {
 
 		assertSoftly(softly -> {
 
-			softly.assertThat(extPath("second.third2.value").getIdDefiningParentPath().getLength()).isEqualTo(0);
-			softly.assertThat(extPath("second.third.value").getIdDefiningParentPath().getLength()).isEqualTo(0);
-			softly.assertThat(extPath("secondList.third2.value").getIdDefiningParentPath().getLength()).isEqualTo(0);
-			softly.assertThat(extPath("secondList.third.value").getIdDefiningParentPath().getLength()).isEqualTo(0);
-			softly.assertThat(extPath("second2.third2.value").getIdDefiningParentPath().getLength()).isEqualTo(0);
-			softly.assertThat(extPath("second2.third.value").getIdDefiningParentPath().getLength()).isEqualTo(0);
+			softly.assertThat(extPath("second.third2.value").getIdDefiningParentPath().getLength()).isZero();
+			softly.assertThat(extPath("second.third.value").getIdDefiningParentPath().getLength()).isZero();
+			softly.assertThat(extPath("secondList.third2.value").getIdDefiningParentPath().getLength()).isZero();
+			softly.assertThat(extPath("secondList.third.value").getIdDefiningParentPath().getLength()).isZero();
+			softly.assertThat(extPath("second2.third2.value").getIdDefiningParentPath().getLength()).isZero();
+			softly.assertThat(extPath("second2.third.value").getIdDefiningParentPath().getLength()).isZero();
 			softly.assertThat(extPath("withId.second.third2.value").getIdDefiningParentPath().getLength()).isEqualTo(1);
 			softly.assertThat(extPath("withId.second.third.value").getIdDefiningParentPath().getLength()).isEqualTo(1);
 		});

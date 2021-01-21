@@ -114,7 +114,7 @@ public class JdbcQueryMethodUnitTests {
 	public void returnsNullIfNoQueryIsFound() throws NoSuchMethodException {
 
 		JdbcQueryMethod queryMethod = createJdbcQueryMethod("methodWithoutAnyQuery");
-		assertThat(queryMethod.getDeclaredQuery()).isEqualTo(null);
+		assertThat(queryMethod.getDeclaredQuery()).isNull();
 	}
 
 	@Query(value = QUERY, rowMapperClass = CustomRowMapper.class)

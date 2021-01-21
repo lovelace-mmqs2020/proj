@@ -225,7 +225,7 @@ public class QueryAnnotationHsqlIntegrationTests {
 		repository.save(entity);
 
 		assertThat(repository.updateName(entity.id, "b")).isEqualTo(1);
-		assertThat(repository.updateName(9999L, "c")).isEqualTo(0);
+		assertThat(repository.updateName(9999L, "c")).isZero();
 
 		assertThat(repository.findById(entity.id)) //
 				.describedAs("update was not performed as expected") //

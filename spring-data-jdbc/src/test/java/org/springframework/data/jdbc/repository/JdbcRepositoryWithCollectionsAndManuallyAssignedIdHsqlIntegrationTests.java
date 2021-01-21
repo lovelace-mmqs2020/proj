@@ -213,7 +213,7 @@ public class JdbcRepositoryWithCollectionsAndManuallyAssignedIdHsqlIntegrationTe
 		assertThat(repository.findById(entity.id)).isEmpty();
 
 		Long count = template.queryForObject("select count(1) from Element", new HashMap<>(), Long.class);
-		assertThat(count).isEqualTo(0);
+		assertThat(count).isZero();
 	}
 
 	private Element createElement(String content) {
