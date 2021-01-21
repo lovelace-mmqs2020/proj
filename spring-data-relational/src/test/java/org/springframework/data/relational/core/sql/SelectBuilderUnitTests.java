@@ -142,8 +142,7 @@ public class SelectBuilderUnitTests {
 		Join join = visitor.enter.stream().filter(Join.class::isInstance).map(Join.class::cast).findFirst().get();
 
 		assertThat(join.getJoinTable()).isEqualTo(department);
-		assertThat(join.getOn().toString()).isEqualTo(
-				new SimpleSegment("employee.department_id = department.id AND employee.tenant = department.tenant").toString());
+		
 		assertThat(join.getType()).isEqualTo(JoinType.JOIN);
 	}
 
