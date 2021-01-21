@@ -94,10 +94,8 @@ public final class Identifier {
 
 		List<SingleIdentifierValue> values = new ArrayList<>();
 
-		map.forEach((k, v) -> {
-
-			values.add(new SingleIdentifierValue(k, v, v != null ? ClassUtils.getUserClass(v) : Object.class));
-		});
+		map.forEach((k, v) -> 	values.add(new SingleIdentifierValue(k, v, v != null ? ClassUtils.getUserClass(v) : Object.class)));
+		
 
 		return new Identifier(Collections.unmodifiableList(values));
 	}
