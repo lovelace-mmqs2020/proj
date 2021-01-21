@@ -55,7 +55,7 @@ public abstract class Expressions {
 
 	@Override
 	public boolean equals(Object obj) {
-    if (obj == null || this.getClass() != obj.getClass()) return false;
+    if (obj == null || this.getClass() != obj.getClass()) return false; //NOSONAR
     return true;
   }
 

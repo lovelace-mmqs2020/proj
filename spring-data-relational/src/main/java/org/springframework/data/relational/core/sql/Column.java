@@ -330,6 +330,7 @@ public class Column extends AbstractSegment implements Expression, Named {
 		return prefix;
 	}
 
+	@SuppressWarnings({"squid:S2681"})
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) return true;
