@@ -42,7 +42,7 @@ public class OrderByClauseVisitorUnitTests {
 		OrderByClauseVisitor visitor = new OrderByClauseVisitor(new SimpleRenderContext(NamingStrategies.asIs()));
 		select.visit(visitor);
 
-		assertThat(visitor.getRenderedPart().toString()).isEqualTo("emp_name ASC");
+		assertThat(visitor.getRenderedPart()).hasToString("emp_name ASC");
 	}
 
 	@Test // DATAJDBC-309
@@ -56,6 +56,6 @@ public class OrderByClauseVisitorUnitTests {
 		OrderByClauseVisitor visitor = new OrderByClauseVisitor(new SimpleRenderContext(NamingStrategies.toUpper()));
 		select.visit(visitor);
 
-		assertThat(visitor.getRenderedPart().toString()).isEqualTo("EMP_NAME ASC");
+		assertThat(visitor.getRenderedPart()).hasToString("EMP_NAME ASC");
 	}
 }
