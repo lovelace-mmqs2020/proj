@@ -42,4 +42,18 @@ public class SelectList extends AbstractSegment {
 	public String toString() {
 		return StringUtils.collectionToDelimitedString(selectListaren, ", ");
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+    if (obj == null) return false;
+    if (this.getClass() != obj.getClass()) return false;
+
+    SelectList other = (SelectList) obj;
+    return selectListaren.equals(other.selectListaren);
+  }
+
+	@Override
+	public int hashCode() {
+		return selectListaren.hashCode();
+	}
 }

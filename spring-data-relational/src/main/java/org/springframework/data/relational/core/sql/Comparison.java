@@ -97,4 +97,18 @@ public class Comparison extends AbstractSegment implements Condition {
 	public String toString() {
 		return left.toString() + " " + comparator + " " + right.toString();
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+    if (obj == null) return false;
+    if (this.getClass() != obj.getClass()) return false;
+
+    Comparison other = (Comparison) obj;
+    return left.equals(other.left) && right.equals(other.right) && comparator.equals(other.comparator);
+  }
+
+	@Override
+	public int hashCode() {
+		return left.hashCode() * right.hashCode();
+	}
 }

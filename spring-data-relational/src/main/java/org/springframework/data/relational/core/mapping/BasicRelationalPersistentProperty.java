@@ -262,4 +262,18 @@ public class BasicRelationalPersistentProperty extends AnnotationBasedPersistent
 		return isCollectionLike() && !Set.class.isAssignableFrom(this.getType());
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+    if (obj == null) return false;
+    if (this.getClass() != obj.getClass()) return false;
+
+    BasicRelationalPersistentProperty other = (BasicRelationalPersistentProperty) obj;
+    return getProperty().equals(other.getProperty()) && getOwner().equals(other.getOwner());
+  }
+
+	@Override
+	public int hashCode() {
+		return getProperty().hashCode() * getOwner().hashCode();
+	}
+
 }

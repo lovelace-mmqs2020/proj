@@ -71,6 +71,21 @@ public class Join extends AbstractSegment {
 		return type + " " + joinTable + " ON " + on;
 	}
 
+
+	@Override
+	public boolean equals(Object obj) {
+    if (obj == null) return false;
+    if (this.getClass() != obj.getClass()) return false;
+
+    Join other = (Join) obj;
+    return type.equals(other.type) && joinTable.equals(other.joinTable);
+  }
+
+	@Override
+	public int hashCode() {
+		return type.hashCode() * joinTable.hashCode();
+	}
+
 	public enum JoinType {
 
 		/**

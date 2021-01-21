@@ -52,4 +52,18 @@ public class Literal<T> extends AbstractSegment implements Expression {
 
 		return content.toString();
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+    if (obj == null) return false;
+    if (this.getClass() != obj.getClass()) return false;
+
+    Literal other = (Literal) obj;
+    return content.equals(other.content);
+  }
+
+	@Override
+	public int hashCode() {
+		return content.hashCode();
+	}
 }

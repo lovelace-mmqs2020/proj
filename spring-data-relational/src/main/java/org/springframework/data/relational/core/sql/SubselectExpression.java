@@ -40,4 +40,18 @@ public class SubselectExpression extends AbstractSegment implements Expression {
 	public String toString() {
 		return "(" + subselect.toString() + ")";
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+    if (obj == null) return false;
+    if (this.getClass() != obj.getClass()) return false;
+
+    SubselectExpression other = (SubselectExpression) obj;
+    return subselect.equals(other.subselect);
+  }
+
+	@Override
+	public int hashCode() {
+		return subselect.hashCode();
+	}
 }

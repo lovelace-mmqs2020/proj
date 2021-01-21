@@ -74,4 +74,18 @@ public class IsNull extends AbstractSegment implements Condition {
 	public String toString() {
 		return expression + (negated ? " IS NOT NULL" : " IS NULL");
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+    if (obj == null) return false;
+    if (this.getClass() != obj.getClass()) return false;
+
+    IsNull other = (IsNull) obj;
+    return expression.equals(other.expression);
+  }
+
+	@Override
+	public int hashCode() {
+		return expression.hashCode();
+	}
 }

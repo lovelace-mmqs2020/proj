@@ -330,6 +330,21 @@ public class Column extends AbstractSegment implements Expression, Named {
 		return prefix;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+    if (obj == null) return false;
+    if (this.getClass() != obj.getClass()) return false;
+
+    Column other = (Column) obj;
+    return name.equals(other.name) && table.equals(other.name);
+  }
+
+		@Override
+		public int hashCode() {
+			return name.hashCode();
+		}
+
 	/**
 	 * {@link Aliased} {@link Column} implementation.
 	 */
@@ -384,6 +399,19 @@ public class Column extends AbstractSegment implements Expression, Named {
 		@Override
 		public String toString() {
 			return getPrefix() + getName() + " AS " + getAlias();
+		}
+		@Override
+		public boolean equals(Object obj) {
+	    if (obj == null) return false;
+	    if (this.getClass() != obj.getClass()) return false;
+
+	    AliasedColumn other = (AliasedColumn) obj;
+	    return alias.equals(other.alias);
+	  }
+
+		@Override
+		public int hashCode() {
+			return alias.hashCode();
 		}
 	}
 }

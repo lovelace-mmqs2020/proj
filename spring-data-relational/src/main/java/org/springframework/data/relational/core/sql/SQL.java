@@ -33,7 +33,7 @@ import org.springframework.util.Assert;
  * @see Functions
  * @see StatementBuilder
  */
-public abstract class SQL {
+public  interface SQL {
 
 	/**
 	 * Creates a new {@link Column} associated with a source {@link Table}.
@@ -116,7 +116,4 @@ public abstract class SQL {
 	public static <T> Literal<T> nullLiteral() {
 		return new Literal<>(null);
 	}
-
-	// Utility constructor.
-	private SQL() {}
 }

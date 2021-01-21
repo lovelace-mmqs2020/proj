@@ -49,4 +49,18 @@ public class From extends AbstractSegment {
 	public String toString() {
 		return "FROM " + StringUtils.collectionToDelimitedString(tables, ", ");
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+    if (obj == null) return false;
+    if (this.getClass() != obj.getClass()) return false;
+
+    From other = (From) obj;
+    return tables.equals(other.tables);
+  }
+
+	@Override
+	public int hashCode() {
+		return tables.hashCode() * tables.hashCode();
+	}
 }

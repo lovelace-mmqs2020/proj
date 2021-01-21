@@ -75,4 +75,18 @@ public class AssignValue extends AbstractSegment implements Assignment {
 		StringBuilder builder = new StringBuilder();
 		return builder.append(this.column).append(" = ").append(this.value).toString();
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+    if (obj == null) return false;
+    if (this.getClass() != obj.getClass()) return false;
+
+    AssignValue other = (AssignValue) obj;
+    return column.equals(other.column) && value.equals(other.value);
+  }
+
+	@Override
+	public int hashCode() {
+		return column.hashCode() * value.hashCode();
+	}
 }

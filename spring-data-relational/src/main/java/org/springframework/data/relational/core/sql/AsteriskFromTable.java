@@ -63,4 +63,18 @@ public class AsteriskFromTable extends AbstractSegment implements Expression {
 
 		return table.toString() + ".*";
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+    if (obj == null) return false;
+    if (this.getClass() != obj.getClass()) return false;
+
+    AsteriskFromTable other = (AsteriskFromTable) obj;
+    return table.equals(other.table);
+  }
+
+	@Override
+	public int hashCode() {
+		return table.hashCode();
+	}
 }

@@ -49,4 +49,18 @@ public class Into extends AbstractSegment {
 	public String toString() {
 		return "INTO " + StringUtils.collectionToDelimitedString(tables, ", ");
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+    if (obj == null) return false;
+    if (this.getClass() != obj.getClass()) return false;
+
+    Into other = (Into) obj;
+    return tables.equals(other.tables);
+  }
+
+	@Override
+	public int hashCode() {
+		return tables.hashCode();
+	}
 }

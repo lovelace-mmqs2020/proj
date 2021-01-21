@@ -80,4 +80,18 @@ public class SimpleCondition extends AbstractSegment implements Condition {
 	public String toString() {
 		return expression.toString() + " " + comparator + " " + predicate;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+    if (obj == null) return false;
+    if (this.getClass() != obj.getClass()) return false;
+
+    SimpleCondition other = (SimpleCondition) obj;
+    return expression.equals(other.expression);
+  }
+
+	@Override
+	public int hashCode() {
+		return expression.hashCode() * comparator.hashCode();
+	}
 }

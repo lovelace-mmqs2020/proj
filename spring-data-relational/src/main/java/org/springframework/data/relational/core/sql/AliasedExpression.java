@@ -59,4 +59,18 @@ class AliasedExpression extends AbstractSegment implements Aliased, Expression {
 	public String toString() {
 		return expression.toString() + " AS " + alias;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+    if (obj == null) return false;
+    if (this.getClass() != obj.getClass()) return false;
+
+    AliasedExpression other = (AliasedExpression) obj;
+    return expression.equals(other.expression) && alias.equals(other.alias);
+  }
+
+	@Override
+	public int hashCode() {
+		return expression.hashCode() * alias.hashCode();
+	}
 }

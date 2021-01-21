@@ -47,4 +47,18 @@ public class Not extends AbstractSegment implements Condition {
 	public String toString() {
 		return "NOT " + condition.toString();
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+    if (obj == null) return false;
+    if (this.getClass() != obj.getClass()) return false;
+
+    Not other = (Not) obj;
+    return condition.equals(other.condition);
+  }
+
+	@Override
+	public int hashCode() {
+		return condition.hashCode() * condition.hashCode();
+	}
 }

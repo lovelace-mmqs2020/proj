@@ -15,8 +15,6 @@
  */
 package org.springframework.data.relational.core.sql;
 
-
-
 /**
  * Bind marker/parameter placeholder used to construct prepared statements with parameter substitution.
  *
@@ -58,6 +56,20 @@ public class BindMarker extends AbstractSegment implements Expression {
 		@Override
 		public String toString() {
 			return "?[" + name + "]";
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+	    if (obj == null) return false;
+	    if (this.getClass() != obj.getClass()) return false;
+
+	    NamedBindMarker other = (NamedBindMarker) obj;
+	    return name.equals(other.name);
+	  }
+
+		@Override
+		public int hashCode() {
+			return name.hashCode();
 		}
 	}
 }

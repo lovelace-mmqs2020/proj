@@ -173,4 +173,18 @@ public class In extends AbstractSegment implements Condition {
 	public boolean isNotIn() {
 		return notIn;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+    if (obj == null) return false;
+    if (this.getClass() != obj.getClass()) return false;
+
+    In other = (In) obj;
+    return left.equals(other.left);
+  }
+
+	@Override
+	public int hashCode() {
+		return left.hashCode();
+	}
 }

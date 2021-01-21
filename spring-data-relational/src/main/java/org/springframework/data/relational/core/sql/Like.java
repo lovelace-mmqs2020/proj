@@ -71,4 +71,18 @@ public class Like extends AbstractSegment implements Condition {
 	public String toString() {
 		return left.toString() + " LIKE " + right.toString();
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+    if (obj == null) return false;
+    if (this.getClass() != obj.getClass()) return false;
+
+    Like other = (Like) obj;
+    return left.equals(other.left) && right.equals(other.right);
+  }
+
+	@Override
+	public int hashCode() {
+		return left.hashCode() * right.hashCode();
+	}
 }

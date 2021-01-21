@@ -106,6 +106,20 @@ public class SimpleFunction extends AbstractSegment implements Expression {
 		return functionName + "(" + StringUtils.collectionToDelimitedString(expressions, ", ") + ")";
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+    if (obj == null) return false;
+    if (this.getClass() != obj.getClass()) return false;
+
+    SimpleFunction other = (SimpleFunction) obj;
+    return functionName.equals(other.functionName);
+  }
+
+	@Override
+	public int hashCode() {
+		return functionName.hashCode() * expressions.hashCode();
+	}
+
 	/**
 	 * {@link Aliased} {@link SimpleFunction} implementation.
 	 */
@@ -126,5 +140,19 @@ public class SimpleFunction extends AbstractSegment implements Expression {
 		public SqlIdentifier getAlias() {
 			return alias;
 		}
+
+		@Override
+	public boolean equals(Object obj) {
+    if (obj == null) return false;
+    if (this.getClass() != obj.getClass()) return false;
+
+    AliasedFunction other = (AliasedFunction) obj;
+    return alias.equals(other.alias);
+  }
+
+	@Override
+	public int hashCode() {
+		return alias.hashCode();
+	}
 	}
 }

@@ -70,7 +70,7 @@ public class NamingStrategyUnitTests {
 
 	@Test
 	public void getSchema() {
-		assertThat(target.getSchema()).isEqualTo("");
+		assertThat(target.getSchema()).isEmpty();
 	}
 
 	@Test

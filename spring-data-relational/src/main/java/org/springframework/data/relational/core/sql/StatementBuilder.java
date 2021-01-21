@@ -33,7 +33,7 @@ import org.springframework.data.relational.core.sql.SelectBuilder.SelectAndFrom;
  * @see Conditions
  * @see Functions
  */
-public abstract class StatementBuilder {
+public interface StatementBuilder {
 
 	/**
 	 * Creates a new {@link SelectBuilder} and includes the {@code SELECT} columns.
@@ -140,6 +140,4 @@ public abstract class StatementBuilder {
 	public static DeleteBuilder delete() {
 		return Delete.builder();
 	}
-
-	private StatementBuilder() {}
 }

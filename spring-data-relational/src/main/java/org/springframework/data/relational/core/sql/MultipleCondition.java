@@ -53,4 +53,18 @@ public abstract class MultipleCondition extends AbstractSegment implements Condi
 		conditions.forEach(c -> joiner.add(c.toString()));
 		return joiner.toString();
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+    if (obj == null) return false;
+    if (this.getClass() != obj.getClass()) return false;
+
+    MultipleCondition other = (MultipleCondition) obj;
+    return conditions.equals(other.conditions) && delimiter.equals(other.delimiter);
+  }
+
+	@Override
+	public int hashCode() {
+		return conditions.hashCode() * delimiter.hashCode();
+	}
 }

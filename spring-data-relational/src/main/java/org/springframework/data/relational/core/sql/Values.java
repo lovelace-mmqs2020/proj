@@ -49,4 +49,18 @@ public class Values extends AbstractSegment {
 	public String toString() {
 		return "VALUES(" + StringUtils.collectionToDelimitedString(tables, ", ") + ")";
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+    if (obj == null) return false;
+    if (this.getClass() != obj.getClass()) return false;
+
+    Values other = (Values) obj;
+    return tables.equals(other.tables);
+  }
+
+	@Override
+	public int hashCode() {
+		return tables.hashCode();
+	}
 }

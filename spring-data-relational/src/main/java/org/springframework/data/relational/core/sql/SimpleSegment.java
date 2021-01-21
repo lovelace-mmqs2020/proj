@@ -39,4 +39,18 @@ public class SimpleSegment extends AbstractSegment {
 	public String toString() {
 		return getSql();
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+    if (obj == null) return false;
+    if (this.getClass() != obj.getClass()) return false;
+
+    SimpleSegment other = (SimpleSegment) obj;
+    return sql.equals(other.sql);
+  }
+
+	@Override
+	public int hashCode() {
+		return sql.hashCode();
+	}
 }

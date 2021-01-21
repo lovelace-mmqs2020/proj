@@ -44,6 +44,20 @@ public class Table extends AbstractSegment {
 		this.name = name;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+    if (obj == null) return false;
+    if (this.getClass() != obj.getClass()) return false;
+
+    Table other = (Table) obj;
+    return name.equals(other.name);
+  }
+
+	@Override
+	public int hashCode() {
+		return name.hashCode();
+	}
+
 	/**
 	 * Creates a new {@link Table} given {@code name}.
 	 *
@@ -268,6 +282,20 @@ public class Table extends AbstractSegment {
 
 			this.alias = alias;
 		}
+
+		@Override
+	public boolean equals(Object obj) {
+    if (obj == null) return false;
+    if (this.getClass() != obj.getClass()) return false;
+
+    AliasedTable other = (AliasedTable) obj;
+    return alias.equals(other.alias);
+  }
+
+	@Override
+	public int hashCode() {
+		return alias.hashCode();
+	}
 
 		/*
 		 * (non-Javadoc)

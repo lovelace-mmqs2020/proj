@@ -74,7 +74,7 @@ public class BasicJdbcConverter extends BasicRelationalConverter implements Jdbc
 	private final IdentifierProcessing identifierProcessing = HsqlDbDialect.INSTANCE.getIdentifierProcessing();
 
 	private final RelationResolver relationResolver;
-	private static final String errore = "Errore";
+	private static final String ERRORE = "Errore";
 
 	/**
 	 * Creates a new {@link BasicRelationalConverter} given {@link MappingContext} and a
@@ -232,10 +232,10 @@ public class BasicJdbcConverter extends BasicRelationalConverter implements Jdbc
 			if (supertype != null) {
 				idType = supertype.getTypeArguments().get(1);
 			} else {
-				throw new NullPointerException(errore);
+				throw new NullPointerException(ERRORE);
 			}
 		}  else {
-			throw new NullPointerException(errore);
+			throw new NullPointerException(ERRORE);
 		}
 		Object val = readValue(value, idType);
 		if (val == null) {

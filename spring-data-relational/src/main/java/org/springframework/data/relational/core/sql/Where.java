@@ -40,4 +40,18 @@ public class Where extends AbstractSegment {
 	public String toString() {
 		return "WHERE " + condition.toString();
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+    if (obj == null) return false;
+    if (this.getClass() != obj.getClass()) return false;
+
+    Where other = (Where) obj;
+    return condition.equals(other.condition);
+  }
+
+	@Override
+	public int hashCode() {
+		return condition.hashCode();
+	}
 }
