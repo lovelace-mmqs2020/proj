@@ -48,4 +48,18 @@ public class BasicJdbcPersistentProperty extends BasicRelationalPersistentProper
 		return AggregateReference.class.isAssignableFrom(getRawType());
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+    if (obj == null) return false;
+    if (this.getClass() != obj.getClass()) return false;
+
+    BasicJdbcPersistentProperty other = (BasicJdbcPersistentProperty) obj;
+    return getProperty().equals(other.getProperty()) && getOwner().equals(other.getOwner());
+  }
+
+	@Override
+	public int hashCode() {
+		return (int) getProperty().hashCode() * getOwner().hashCode();
+	}
 }
