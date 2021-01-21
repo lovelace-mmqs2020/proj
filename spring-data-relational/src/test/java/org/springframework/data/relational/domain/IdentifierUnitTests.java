@@ -101,14 +101,5 @@ public class IdentifierUnitTests {
 		assertThat(keys).containsOnly("aName");
 	}
 
-	@Test // DATAJDBC-326
-	public void equalsConsidersEquality() {
-
-		Identifier one = Identifier.from(Collections.singletonMap(unquoted("aName"), "aValue"));
-		Identifier two = Identifier.from(Collections.singletonMap(unquoted("aName"), "aValue"));
-		Identifier three = Identifier.from(Collections.singletonMap(unquoted("aName"), "different"));
-
-		assertThat(one).isEqualTo(two);
-		assertThat(one).isNotEqualTo(three);
-	}
+	
 }
