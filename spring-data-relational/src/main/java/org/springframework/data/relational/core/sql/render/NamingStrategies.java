@@ -31,9 +31,9 @@ import org.springframework.util.Assert;
  * @author Mark Paluch
  * @since 1.1
  */
-public abstract class NamingStrategies {
+public interface NamingStrategies {
 
-	private NamingStrategies() {}
+	
 
 	/**
 	 * Creates a as-is {@link RenderNamingStrategy} that preserves {@link Column} and {@link Table} names as they were
