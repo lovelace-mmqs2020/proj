@@ -71,7 +71,7 @@ public interface RelationalPersistentProperty extends PersistentProperty<Relatio
 	 */
 	default boolean isEmbedded() {
 		return false;
-	};
+	}
 
 	/**
 	 * @return Prefix for embedded columns. If the column is not embedded the return value is null.
@@ -79,7 +79,7 @@ public interface RelationalPersistentProperty extends PersistentProperty<Relatio
 	@Nullable
 	default String getEmbeddedPrefix() {
 		return null;
-	};
+	}
 
 	/**
 	 * Returns whether an empty embedded object is supposed to be created for this property.

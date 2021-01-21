@@ -18,7 +18,6 @@ package org.springframework.data.relational.core.mapping;
 import org.springframework.data.relational.core.sql.IdentifierProcessing;
 import org.springframework.data.util.ParsingUtils;
 import org.springframework.util.Assert;
-import org.springframework.data.relational.core.mapping.RelationalPersistentEntity;
 import lombok.NonNull;
 
 /**

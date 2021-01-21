@@ -15,7 +15,7 @@
  */
 package org.springframework.data.relational.core.sql;
 
-import org.springframework.lang.Nullable;
+
 
 /**
  * Bind marker/parameter placeholder used to construct prepared statements with parameter substitution.
