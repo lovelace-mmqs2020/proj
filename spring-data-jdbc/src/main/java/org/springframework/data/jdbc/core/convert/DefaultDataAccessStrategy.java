@@ -440,14 +440,14 @@ public class DefaultDataAccessStrategy implements DataAccessStrategy {
 
 	@Nullable
 	@SuppressWarnings("unchecked")
-	private <S, ID> ID getIdValueOrNull(S instance, RelationalPersistentEntity<S> persistentEntity) {
+	private <S, I> I getIdValueOrNull(S instance, RelationalPersistentEntity<S> persistentEntity) {
 
-		ID idValue = (ID) persistentEntity.getIdentifierAccessor(instance).getIdentifier();
+		I idValue = (I) persistentEntity.getIdentifierAccessor(instance).getIdentifier();
 
 		return isIdPropertyNullOrScalarZero(idValue, persistentEntity) ? null : idValue;
 	}
 
-	private static <S, ID> boolean isIdPropertyNullOrScalarZero(@Nullable ID idValue,
+	private static <S, I> boolean isIdPropertyNullOrScalarZero(@Nullable I idValue,
 			RelationalPersistentEntity<S> persistentEntity) {
 
 		RelationalPersistentProperty idProperty = persistentEntity.getIdProperty();
