@@ -16,6 +16,7 @@
 package org.springframework.data.relational.core.sql.render;
 
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 import org.springframework.data.relational.core.sql.Column;
 import org.springframework.data.relational.core.sql.SqlIdentifier;
@@ -83,7 +84,7 @@ public interface RenderNamingStrategy {
 	 * @param mappingFunction the function that maps an object name.
 	 * @return a new {@link RenderNamingStrategy} applying {@link Function mapping function}.
 	 */
-	default RenderNamingStrategy map(Function<String, String> mappingFunction) {
+	default RenderNamingStrategy map(UnaryOperator<String> mappingFunction) {
 
 		Assert.notNull(mappingFunction, "Mapping function must not be null!");
 

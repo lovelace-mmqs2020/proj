@@ -24,7 +24,7 @@ import org.springframework.data.relational.core.sql.Column;
 import org.springframework.data.relational.core.sql.SqlIdentifier;
 import org.springframework.data.relational.core.sql.Table;
 import org.springframework.util.Assert;
-
+import java.util.function.UnaryOperator;
 /**
  * Factory for {@link RenderNamingStrategy} objects.
  *
@@ -52,7 +52,7 @@ public interface NamingStrategies {
 	 * @param mappingFunction the mapping {@link Function}, must not be {@literal null}.
 	 * @return the mapping {@link RenderNamingStrategy}.
 	 */
-	public static RenderNamingStrategy mapWith(Function<String, String> mappingFunction) {
+	public static RenderNamingStrategy mapWith(UnaryOperator<String> mappingFunction) {
 		return AsIs.INSTANCE.map(mappingFunction);
 	}
 
